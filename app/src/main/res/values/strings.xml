@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">自助风水</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_guide">GuideActivity</string>
+    <string name="guide_btn">点击进入</string>
+    <string name="longtext">Japanfhishdsfahdihjklllllllllllllllllllllllllllllllllllllllllhsfldkhifdsjhihfdsihhsfdhfilhilhfshuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuluhlfsfsjhfisahfiudhfuahufhusbfudgsgjfdsdfudjshfuksgdugyfusfukhknnjfkdsfuhailhfuahalufghadgsufygsugybygfacgyacyuygnnfxayyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyguuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu</string>
+    <string name="title_activity_camera_content">CameraContentActivity</string>
+    <string name="title_activity_paid">PaidActivity</string>
+    <string name="title_activity_home_center">HomeCenter</string>
+    <string name="title_activity_street_center">StreetCenter</string>
+    <string name="title_activity_rigester">RigesterActivity</string>
+    <string name="title_activity_content_main">ContentMainActivity</string>
+    <string name="title_activity_oritation_main">OritationMainActivity</string>
+    <string name="main_intro">欢迎使用两岸易理网\n\t\t自助测风水APP</string>
+
+    <string name="orientation_one">1.如果你的房屋只有一面明显都是主要的窗户（或阳台）
+请站在整个房屋相对中央的位置， 把手机放平、 让手机头正朝向主要的窗户（或阳台）的方向按下箭头确定按钮</string>
+    <string name="orientation_two">
+        2.如果窗户不明显、 或都差不多， 但房屋明显有一方向是街道、 道路、 广场、 江、 河、 湖、 海等视野开阔的方向
+请站在整个房屋相对中央的位置， 把手机放平、 让手机头正朝向街道、 道路、 开阔的方向、 广场、 湖、 河、 按下箭头确定按钮
+    </string>
+    <string name="orientation_three">
+        3.如房屋四周都无窗（或只有个别小窗户）， 只有一个进出的门， 
+        请站在整个房屋相对中央的位置， 把手机放平、 让手机头正朝向门的方向按下箭头确定按钮.
+    </string>
+    <string name="orientation_four">
+        4.如房屋四周都无窗（或只有个别小窗户）， 有大门也有小门， 
+请站在整个房屋相对中央的位置， 把手机放平、 让手机头正朝向大门的方向按下箭头确定按钮
+    </string>
+    <string name="title_activity_choice_question">ChoiceQuestion</string>
+
+    <string-array name="choice_question">
+        <item>2.您房屋左面是否有宽度以及高度大于或等于您这幢楼的建筑物、 丘陵或大山相邻？</item>
+        <item>3.您房屋右面是否有宽度以及高度大于或等于您这幢楼的建筑物、 丘陵或大山相邻？</item>
+        <item>4.您房屋正后方500米内是否有宽度以及高度大于或等于您这幢楼的建筑物？</item>
+        <item>5.您房屋正后方视线可及的范围内是否有宽度以及高度大于或等于您这幢楼的丘陵或大山？</item>
+        <item>6.站在您房屋内（在窗户口或门口观察）， 视野所及的范围中， 是否有政府、 法院、 警局（派出所、 监狱）、 庙宇（道观、 尼姑庵）、 屠宰场、 墓地、 祭坛、 高塔？（只要有一条符合就选有）</item>
+        <item>7.您的房前屋后是否直接与大树林或山林相邻？（有其他住宅间隔不在此列）</item>
+        <item>8.您房屋周围是否四边旷野、 空山僻坞、 独家此一家？</item>
+        <item>9.您的房屋是否基本方正（没有明显缺角、 并非奇形怪状）？</item>
+    </string-array>
+
+    <string name="camera_operate_one">第一步：请站在房屋内的相对中央位置</string>
+    <string name="camera_operate_two">第二步：请竖直拿着手机， 让摄像头能查看到室内的位置</string>
+    <string name="camera_operate_three">第三步：请原地慢慢转圈， 屏幕上会出现不同方位的风水喜忌分析</string>
+
+    <string name="title_activity_total_evaluate">TotalEvaluate</string>
+    <string name="title_activity_app_evaluate">AppEvaluateActivity</string>
+
+    <string-array name="common_time">
+        <item>00:00-00:59早子时</item>
+        <item>01:00-02:59丑时</item>
+        <item>03:00-05:00寅时</item>
+        <item>05:00-06:59卯时</item>
+        <item>07:00-08:59辰时</item>
+        <item>09:00-10:59巳时</item>
+        <item>11:00-12:59午时</item>
+        <item>13:00-14:59未时</item>
+        <item>15:00-16:59申时</item>
+        <item>17:00-18:59酉时</item>
+        <item>19:00-20:59戌时</item>
+        <item>21:00-22:59亥时</item>
+        <item>23:00-23:59晚子时</item>
+    </string-array>
+    <string name="title_activity_user_evaluate">UserEvaluateActivity</string>
+    <string name="title_activity_over">OverActivity</string>
+    <string name="title_activity_register_back_up">RegisterBackUpActivity</string>
+
+    <!--Over界面-->
+    <string name="txt_user_evaluate_tv_one">合理应用风水（环境）能对生命起到积极的辅助作用 ，但成败得失主要还是看命主本身的素质 （生辰八字）。</string>
+    <string name="txt_user_evaluate_tv_two">风水如能应用得当，命主吉者加吉、凶者减凶；但不能颠覆命主的发展规律。</string>
+    <string name="txt_user_evaluate_tv_three">更多资讯欢迎登陆</string>
+    <string name="txt_user_evaluate_tv_five">两岸易理网或搜索微信公众平台（两岸易理）详细了解.........</string>
+</resources>

@@ -1,0 +1,86 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context="com.haipeng.geomancy.ui.UserEvaluateActivity">
+
+    <LinearLayout
+        android:id="@+id/user_evaluate_activity_ll_user_evaluate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_xiangyun"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:visibility="visible">
+
+        <TextView
+
+            style="@style/TextViewStyleWhiteLargesp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请问您对本产品及服务是否满意" />
+
+        <RadioGroup
+            android:id="@+id/user_evaluate_activity_rg_evaluate"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+            <RadioButton
+                android:id="@+id/user_evaluate_activity_rb_satisfaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="满意" />
+
+            <RadioButton
+                android:id="@+id/user_evaluate_activity_rb_ordinary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="一般" />
+
+            <RadioButton
+                android:id="@+id/user_evaluate_activity_rb_dissatisfaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="不满意" />
+        </RadioGroup>
+
+        <TextView
+            style="@style/TextViewStyleWhiteLargesp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请问您对本产品的意见或建议" />
+
+        <EditText
+            android:id="@+id/user_evaluate_et_comment"
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@color/my_white3"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:text="" />
+
+        <Button
+            android:id="@+id/user_evaluate_activity_btn_submit"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_brown"
+            android:text="提交"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/config_hidden"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+
+            />
+    </LinearLayout>
+
+</ScrollView>

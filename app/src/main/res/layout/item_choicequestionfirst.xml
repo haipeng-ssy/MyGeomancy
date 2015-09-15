@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="请按照您房屋周围的实际状况选择以下问题（形峦）："
+        android:textSize="18sp"
+        android:typeface="sans"
+        android:textColor="#000000"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="1. 站在您手机头朝向的一面窗户、阳台或门口向远处眺望，视野可达的最远范围为 （只要没有建筑物、山体、遮挡住您的视线都算视野可达的范围）"/>
+    <RadioGroup
+        android:id="@+id/choice_quesiont_first_rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton
+            android:id="@+id/choice_quesiont_first_rba"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="a.10米以内"/>
+        <RadioButton
+            android:id="@+id/choice_quesiont_first_rbb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="b.10米到100米左右"/>
+        <RadioButton
+            android:id="@+id/choice_quesiont_first_rbc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="c.100米以上,但并非四周旷野（并非左面、右面、前面都是旷野）"/>
+        </RadioGroup>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="\n面对您手机头朝向的方向："
+        android:textColor="#000000"/>
+</LinearLayout>

@@ -1,0 +1,308 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_xiangyun"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context="com.haipeng.geomancy.ui.RigesterActivity">
+    <TextView
+        android:id="@+id/tv_activity_rigester_title"
+        style="@style/TextViewStyleWhiteLargesp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:text="房主生辰信息"
+        android:gravity="center_horizontal"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="姓名"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/rigister_homer_owner_name"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:text=""
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:background="@color/my_white3"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:gravity="bottom"
+            android:paddingBottom="5dp"
+            android:text="性别"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <RadioGroup
+            android:id="@+id/rg_sex"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+
+            >
+
+            <RadioButton
+                android:id="@+id/radio_btn_man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="男"
+                android:textColor="@color/white"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/radio_btn_woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="女"
+                android:textColor="@color/white" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="出生地域:"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="省"
+            android:textColor="@color/white" />
+
+        <Spinner
+            android:layout_width="100dp"
+            android:layout_height="27dp"
+            android:id="@+id/spinner_province"
+            android:background="@drawable/bg_spinner"
+            >
+            </Spinner>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="市"
+            android:textColor="@color/white" />
+
+        <Spinner
+            android:layout_width="100dp"
+            android:layout_height="27dp"
+            android:id="@+id/spinner_city"
+            android:background="@drawable/bg_spinner">
+
+        </Spinner>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:gravity="center"
+            android:text="区/县"
+            android:textColor="@color/white" />
+
+        <Spinner
+            android:layout_width="100dp"
+            android:layout_height="27dp"
+            android:id="@+id/spinner_county"
+            android:background="@drawable/bg_spinner">
+
+        </Spinner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <RadioGroup
+            android:id="@+id/birthday_Date"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            >
+
+            <RadioButton
+                android:id="@+id/birthday_Date_World"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="公历(阳历)"
+                android:textColor="@color/white"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/birthday_Date_China"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="农历(阴历)"
+                android:textColor="@color/white" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingBottom="5dp"
+            android:text="出生年月日"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/rigister_homer_owner_birthday"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:focusable="false"
+            android:background="@color/my_white3"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:gravity="bottom"
+            android:paddingBottom="5dp"
+            android:text="是否知道具体时间"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <RadioGroup
+            android:id="@+id/rg_common_time"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            >
+
+            <RadioButton
+                android:id="@+id/rb_common_time_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="是"
+                android:textColor="@color/white"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rb_common_time_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="否"
+                android:textColor="@color/white" />
+        </RadioGroup>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_time_picker"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+        <TextView
+            android:id="@+id/tv_xialinshi"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:gravity="bottom"
+            android:text="夏令时"
+            android:visibility="invisible"/>
+        <EditText
+            android:id="@+id/my_birth_time"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:background="@color/my_white3"
+           />
+        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_common_time"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:layout_marginBottom="20dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:gravity="bottom"
+            android:text="大概时间"/>
+        <TextView
+            android:id="@+id/tv_xialinshi_same"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:gravity="bottom"
+            android:text="夏令时"/>
+
+        <Spinner
+            android:id="@+id/spinner_common_time"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:entries="@array/common_time"
+            android:background="@drawable/bg_spinner_l"
+            >
+          </Spinner>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/rigister_sign_up"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_brown"
+        android:text="注册"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>
+</ScrollView>

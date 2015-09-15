@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.haipeng.geomancy.ui.PaidActivity">
+
+    <TextView
+        android:id="@+id/paid_activity_title"
+        android:text="注册成功请付款"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"/>
+
+    <WebView
+        android:id="@+id/paid_activity_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/paid_activity_title"
+        >
+        </WebView>
+    <Button
+        android:id="@+id/paid_activity_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/borderred"
+        android:textColor="@color/red"
+        android:text="继续服务"
+        android:visibility="invisible"/>
+</RelativeLayout>
