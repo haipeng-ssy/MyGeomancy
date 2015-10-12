@@ -25,6 +25,7 @@ import com.haipeng.geomancy.UserData.UserDataSharedPreferences;
 import com.haipeng.geomancy.adapter.EvaluteAdapter;
 import com.haipeng.geomancy.data.BaseGetData;
 import com.haipeng.geomancy.data.HttpPostUri;
+import com.haipeng.geomancy.data.MyStaticData;
 import com.haipeng.geomancy.entity.ChoiceQuestionInfo;
 import com.haipeng.geomancy.entity.EvaluteInfo;
 import com.haipeng.geomancy.util.MyListView;
@@ -35,11 +36,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+//得出的总体评价
 public class TotalEvaluate extends BaseActivity implements View.OnClickListener{
 
     Button   btn_evaluate;
     TextView tv_home_name,tv_home_sex,tv_home_bir_china,tv_home_bir_world,tv_home_bir_region
-            ,tv_home_bir_sun,tv_home_towards;
+            ,tv_home_bir_sun;
     TextView tv_home_name_title,tv_home_sex_title,tv_home_bir_china_title,
             tv_home_bir_world_title,tv_home_bir_region_title
             ,tv_home_bir_sun_title,tv_home_towards_title,tv_total_evaluate_title;
@@ -47,8 +49,6 @@ public class TotalEvaluate extends BaseActivity implements View.OnClickListener{
     String   homeOwnerId;
     String  jsonString;
 
-    String init_home_towads ;
-    String home_towards ;
     String home_name    ;
     String home_sex     ;
     String bir_world    ;
@@ -87,9 +87,7 @@ public class TotalEvaluate extends BaseActivity implements View.OnClickListener{
         tv_home_bir_region = (TextView) findViewById(R.id.tv_home_bir_region);
         tv_home_bir_sun = (TextView) findViewById(R.id.tv_home_bir_sun);
         btn_evaluate = (Button) findViewById(R.id.total_evaluate_btn);
-
         mLisView = (LinearLayout) findViewById(R.id.total_evaluate_listView);
-
         tv_hometowards = (TextView) findViewById(R.id.tv_hometowards);
         tv_homeproperty = (TextView) findViewById(R.id.tv_homeproperty);
         tv_homeownerproperty = (TextView) findViewById(R.id.tv_homeownerproperty);
@@ -108,20 +106,15 @@ public class TotalEvaluate extends BaseActivity implements View.OnClickListener{
      */
     public static void setListViewHeightBasedOnChildren(MyListView listView) {
         if(listView == null) return;
-
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {
-            // pre-condition
             return;
         }
-
         int totalHeight = 0;
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, listView);
             listItem.measure(0, 0);
-
             totalHeight += listItem.getMeasuredHeight();
-
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
@@ -134,18 +127,6 @@ public class TotalEvaluate extends BaseActivity implements View.OnClickListener{
         btn_evaluate.setOnClickListener(this);
         jsonString = getIntent().getStringExtra("json");
         ttf_lishu    = Typeface.createFromAsset(getAssets(),"fonts/lishu.ttf");
-
-//
-//        tv_home_name.setTypeface(ttf_lishu);
-//        tv_home_sex .setTypeface(ttf_lishu);
-//        tv_home_bir_china .setTypeface(ttf_lishu);
-//        tv_home_bir_world.setTypeface(ttf_lishu);
-//        tv_home_bir_region.setTypeface(ttf_lishu);
-//        tv_home_bir_sun .setTypeface(ttf_lishu);
-//        tv_hometowards.setTypeface(ttf_lishu);
-//        tv_homeproperty.setTypeface(ttf_lishu);
-//        tv_homeownerproperty.setTypeface(ttf_lishu);
-//        tv_homelife.setTypeface(ttf_lishu);
     }
 
     @Override
@@ -280,21 +261,8 @@ public class TotalEvaluate extends BaseActivity implements View.OnClickListener{
             }
             one +="评价:"+choose_one.substring(choose_one.indexOf("|")+1)+"\n";
             String str = choose_one.trim().substring(choose_one.indexOf("|")+1).trim();
-//            if(str.equals("")||str.equals("null")||str == null)
-//            {
-//
-//            }else{
-                evaluteInfo.setEvalute(str);
-                evaluteInfoList.add(evaluteInfo);
-//            }
-//            two = getDesci(list,choose_two,0,);
-//            three = getDesci(list,choose_three,1);
-//            four = getDesci(list,choose_four,2);
-//            five = getDesci(list,choose_five,3);
-//            six = getDesci(list,choose_six,4);
-//            seven = getDesci(list,choose_seven,5);
-//            eight = getDesci(list,choose_eight,6);
-//            nine = getDesci(list,choose_nine,7);
+            evaluteInfo.setEvalute(str);
+            evaluteInfoList.add(evaluteInfo);
 
             // /choose把每一道题的选择和评价
             for(int i=0;i<8;i++)
@@ -431,19 +399,14 @@ public class TotalEvaluate extends BaseActivity implements View.OnClickListener{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+    //判断得出是否/有无
     public List<ChoiceQuestionInfo> getTtoN(){
         List<ChoiceQuestionInfo> list = new ArrayList<ChoiceQuestionInfo>();
         String[] choiceQuestionTitles = getResources().getStringArray(R.array.choice_question);

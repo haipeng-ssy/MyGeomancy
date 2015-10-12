@@ -33,9 +33,10 @@ import com.haipeng.geomancy.myView.CompassView;
 
 import org.json.JSONObject;
 
+//用户对此应用服务的评价
 public class AppUserEvaluateActivity extends BaseActivity implements View.OnClickListener{
-    @Override
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -45,7 +46,6 @@ public class AppUserEvaluateActivity extends BaseActivity implements View.OnClic
     CompassView mCompassView;
     RadioGroup user_evaluate_rg;
     String     satisfaction;
-    String     comment;
     EditText   et_user_comment ;
 
     @Override
@@ -57,7 +57,6 @@ public class AppUserEvaluateActivity extends BaseActivity implements View.OnClic
         mCompassView = (CompassView) findViewById(R.id.entrance_activity_comparessView);
         user_evaluate_rg = (RadioGroup) findViewById(R.id.user_evaluate_activity_rg_evaluate);
         et_user_comment  = (EditText) findViewById(R.id.user_evaluate_et_comment);
-
     }
 
     @Override
@@ -82,7 +81,6 @@ public class AppUserEvaluateActivity extends BaseActivity implements View.OnClic
                 return true;
             }
         });
-//        HideInputManaget(et_user_comment);
         findViewById(R.id.config_hidden).requestFocus();
     }
 
@@ -92,7 +90,6 @@ public class AppUserEvaluateActivity extends BaseActivity implements View.OnClic
     }
     public void HideInputManaget(View view) {
         InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//        im.toggleSoftInput(0, InputMethodManager);
         im.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
     }
 
@@ -100,8 +97,6 @@ public class AppUserEvaluateActivity extends BaseActivity implements View.OnClic
     protected void onResume() {
         super.onResume();
         GetCompass(mCompassView,null);
-//        Toast.makeText(this, "请倾斜屏幕，并360度旋转手机，以矫正指南针", Toast.LENGTH_LONG).show();
-
     }
 
     @Override
@@ -140,23 +135,16 @@ public class AppUserEvaluateActivity extends BaseActivity implements View.OnClic
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_user_evaluate, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

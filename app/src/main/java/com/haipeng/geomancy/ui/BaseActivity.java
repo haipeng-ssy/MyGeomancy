@@ -54,15 +54,18 @@ import java.util.Locale;
  * Created by Sunyiyan on 2015/1/24.
  */
 public abstract class BaseActivity extends ActionBarActivity {
+
     HasDgressChange mHDC;
     ActionBar actionBar;
     View actionbarView = null;
     public String point = "";
+
     //指南针
     protected final Handler handler = new Handler();
     float mDirection;
     float mTargetDirection;
-//    ImageView mIV;
+
+    //  ImageView mIV;
     CompassView mIV;
     AccelerateInterpolator mInterpolator;
     CompassView mPointer;
@@ -96,14 +99,10 @@ public abstract class BaseActivity extends ActionBarActivity {
         MyApplication.getInstance().addActionBarActivity(this);
     }
 
-    private float normalizeDegree(float dgree) {
-        return (dgree + 720) % 360;
-    }
-
+    //ActionBar
     public void hideActionBar() {
         actionBar.hide();
     }
-
     public void showActionBar() {
         actionBar.show();
     }
@@ -119,12 +118,6 @@ public abstract class BaseActivity extends ActionBarActivity {
         initView();
         setUpView();
         execute();
-    }
-
-    @Override
-    protected void onDestroy() {
-        MyApplication.getInstance().removeActionBarActivity(this);
-        super.onDestroy();
     }
 
     public void testGPS(final TextView view) {
@@ -152,6 +145,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         });
     }
 
+    //初始化的三个函数
     /**
      * UI初始化
      */
@@ -167,14 +161,11 @@ public abstract class BaseActivity extends ActionBarActivity {
      */
     public abstract void execute();
 
+    //
     public void testLocationOneMeter(double longitude, double latitude, double altitude) {
-
     }
-
     public void testLocationFiveMeters(double longitude, double latitude, double altitude) {
-
     }
-
     public void startActivity(String className, Intent intent) {
         try {
             Class clazz = Class.forName("com.haipeng.geomancy.ui." + className);
@@ -185,6 +176,8 @@ public abstract class BaseActivity extends ActionBarActivity {
             e.printStackTrace();
         }
     }
+
+    //弹出的窗口
     AlertDialog dlg = null;
     public void showMyAlterDialog(final EnsureCancel ec, String title, String txt_ensure, String txt_cancel) {
         dlg = new AlertDialog.Builder(this).create();
@@ -232,76 +225,9 @@ public abstract class BaseActivity extends ActionBarActivity {
     long first;
     long second;
     Handler mHandler;
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            i +=1;
-            if(i == 1)
-            {
-                mHandler = new Handler();
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                       if(i==1)
-                       {
-
-                           finish();
-
-                       }
-                    }
-                },500);
-                first = System.currentTimeMillis();
-                Log.i("first",first+"");
-            }
-            if(i == 2)
-            {
-                second = System.currentTimeMillis();
-                Log.i("second",second+"");
-                if(second - first<500)
-                {
-                   if(mHandler!=null)
-                   {
-                      mHandler.removeCallbacksAndMessages(null);
-                   }
-                    showMyAlterDialog(new EnsureCancel() {
-                       @Override
-                       public void ensure() {
-                           MyApplication.getInstance().killActivitys();
-                           finish();
-                       }
-                       @Override
-                       public void cancel() {
-                              i = 0;
-                       }
-                   },"确认要退出本应用吗","确定","取消");
-                }else{
-                  i = 0;
-                  first = System.currentTimeMillis();
-                }
-            }
-            if(i==3)
-            {
-                i = 1;
-                first = System.currentTimeMillis();
-                mHandler = new Handler();
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(i==1)
-                        {
-                            finish();
-                        }
-                    }
-                },500);
-            }
-            Log.i("i=",i+"");
-        }
-        return true;
-    }
 
 
-    //指南针开始
+    //指南针
     public void GetCompass(final CompassView imageView, HasDgressChange hdc) {
 //        mPointer = compassView;
         if (hdc == null) {
@@ -343,7 +269,6 @@ public abstract class BaseActivity extends ActionBarActivity {
         sm.registerListener(sensorListener,mOrientationSensor,SensorManager.SENSOR_DELAY_GAME);
     }
 
-
     boolean just_once = false;
     long end_time = 0l;
     long start_time = 0l;
@@ -351,6 +276,8 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     long dgress_D_value = 0l;
     long time_D_value = 0l;
+
+    //指南针实时监听器
     SensorEventListener sensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
@@ -424,9 +351,9 @@ public abstract class BaseActivity extends ActionBarActivity {
                         }
                     }
                     currentDegree = -dgress;
-
                 }
                 if (mHDC != null) {
+                    //接口回调
                     mHDC.hadgressChange(-currentDegree);
                 }
 //            }
@@ -441,19 +368,17 @@ public abstract class BaseActivity extends ActionBarActivity {
     };
 
 //    public synchronized void exeRotate() {
-
     public void exeRotate() {
 
         RotateAnimation ra = new RotateAnimation(currentDegree,
                 -dgress, Animation.RELATIVE_TO_SELF, 0.5f,
                 Animation.RELATIVE_TO_SELF, 0.5f);
         //设置动画的持续时间
-        ra.setDuration(100);
+        ra.setDuration(200);
         ra.setFillAfter(true);
         //运行动画
         mIV.startAnimation(ra);
     }
-
 
     private float[] calculateOrientation() {
 
@@ -518,6 +443,7 @@ public abstract class BaseActivity extends ActionBarActivity {
         String imei = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         return imei;
     }
+
 /*
     values[0]  表示Z轴的角度：方向角，我们平时判断的东西南北就是看这个数据的，
     经过我的实验，发现了一个有意思的事情，
@@ -527,11 +453,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     90表示正东，180表示正南，270表示正西。
 
     values[1]  表示X轴的角度：俯仰角   即由静止状态开始，前后翻转
-
     values[2]  表示Y轴的角度：翻转角  即由静止状态开始，左右翻转*/
-
-
-//
 
     @Override
     protected void onPause() {
@@ -594,6 +516,82 @@ public abstract class BaseActivity extends ActionBarActivity {
             return result.toString();
         }
 
+    private float normalizeDegree(float dgree) {
+        return (dgree + 720) % 360;
+    }
 
+    @Override
+    protected void onDestroy() {
+        MyApplication.getInstance().removeActionBarActivity(this);
+        super.onDestroy();
+    }
 
+    //返回键的控制
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            i +=1;
+            if(i == 1)
+            {
+                mHandler = new Handler();
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(i==1)
+                        {
+
+                            finish();
+
+                        }
+                    }
+                },500);
+                first = System.currentTimeMillis();
+                Log.i("first",first+"");
+            }
+            if(i == 2)
+            {
+                second = System.currentTimeMillis();
+                Log.i("second",second+"");
+                if(second - first<500)
+                {
+                    if(mHandler!=null)
+                    {
+                        mHandler.removeCallbacksAndMessages(null);
+                    }
+                    showMyAlterDialog(new EnsureCancel() {
+                        @Override
+                        public void ensure() {
+                            MyApplication.getInstance().killActivitys();
+                            finish();
+                        }
+                        @Override
+                        public void cancel() {
+                            i = 0;
+                        }
+                    },"确认要退出本应用吗","确定","取消");
+                }else{
+                    i = 0;
+                    first = System.currentTimeMillis();
+                }
+            }
+            if(i==3)
+            {
+                i = 1;
+                first = System.currentTimeMillis();
+                mHandler = new Handler();
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(i==1)
+                        {
+                            finish();
+                        }
+                    }
+                },500);
+            }
+            Log.i("i=",i+"");
+        }
+        return true;
+    }
 }

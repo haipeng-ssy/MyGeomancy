@@ -58,23 +58,12 @@ public class PaidActivity extends BaseActivity implements View.OnClickListener {
         btn = (Button) findViewById(R.id.paid_activity_btn);
         webView = (WebView) findViewById(R.id.paid_activity_webview);
         pay_uri = HttpPostUri.pay_uri + "UserID=" + UserId + "&payTitle=" + payTitle + "&payMoney=" + payMoney;
-
-//        webView.addJavascriptInterface(PaidActivity.this,"JavaScriptInterface");
-//        webView.addJavascriptInterface(this,"android");
     }
 
     @Override
     public void setUpView() {
         btn.setOnClickListener(this);
     }
-//    /**
-//     * JavaScriptInterface.PaidCompeleted();
-//     * function hasPaidCompeleted()
-//     * {
-//     * JavaScriptInterface.PaidCompeleted();
-//     * }
-//     * <button value="say hello" onclick="showAndroidToast('Hello,Android!')" data-theme="e"></button>
-//     */
 
     @Override
     public void execute() {
@@ -84,8 +73,8 @@ public class PaidActivity extends BaseActivity implements View.OnClickListener {
         webSettings.setDefaultTextEncodingName("GBK");
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSupportZoom(false);
-//        String uri = "http://192.168.1.101:8080/APKDownloads/";
         webView.loadUrl(pay_uri);
+        //进入付款界面
         BasePayGetData bd = new BasePayGetData(new DataGetFinish() {
                             @Override
                             public void dataGetFinish(JSONObject jsonObject) {
@@ -113,35 +102,17 @@ public class PaidActivity extends BaseActivity implements View.OnClickListener {
     @JavascriptInterface
     public void PaidCompeleted(){
         finish();
-        Intent intent = new Intent();
-        startActivity("ChoiceQuestion",intent);
-//        startActivity("CameraContentActivity",intent);
+        isNeedChoiceQuestion();
     }
-//    @JavascriptInterface
-//    public void notPaidCompeleted(){
-//        finish();
-//        Intent intent = new Intent();
-//        startActivity("ChoiceQuestion",intent);
-////        startActivity("CameraContentActivity",intent);
-//    }
 
-    //    @JavascriptInterface
-//    public void PaidCompeleted() {
-//        finish();
-//        Intent intent = new Intent();
-//        startActivity("ChoiceQuestion", intent);
-//        startActivity("CameraContentActivity",intent);
-//    }
     @JavascriptInterface
     public void notPaidCompeleted() {
         finish();
         Intent intent = new Intent();
         startActivity("MainActivity", intent);
-//        startActivity("CameraContentActivity",intent);
-    }
+  }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_paid, menu);
         return true;
     }
@@ -149,7 +120,6 @@ public class PaidActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -160,8 +130,8 @@ public class PaidActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.paid_activity_btn:
-                //检查是否付款
-                BasePayPostData bap = new BasePayPostData(new DataGetFinish() {
+                //检查是否付款成功
+                BasePayPostData bap = new BasePayPostData(PaidActivity.this,new DataGetFinish() {
                     @Override
                     public void dataGetFinish(JSONObject jsonObjectInit) {
                         boolean result = false;
@@ -170,48 +140,7 @@ public class PaidActivity extends BaseActivity implements View.OnClickListener {
                         }
                         result = GetPayData(jsonObjectInit);
                         if (result) {
-                            if(MyStaticData.isGHJTCY)
-                            {
-                                Map<String,String> map = UserDataSharedPreferences.getChoiceMap(PaidActivity.this);
-                                JSONObject jsonObject = new JSONObject();
-                                try {
-                                    SharedPreferences sp = getSharedPreferences("homeOwnerInfo", Application.MODE_APPEND);
-                                    String homeOwnerId = sp.getString("homeOwnerId", "");
-                                    jsonObject.put("homeOwnerId", homeOwnerId);
-                                    jsonObject.put("1", (map.get("0").toString()));
-                                    jsonObject.put("2", (map.get("1").toString()));
-                                    jsonObject.put("3", (map.get("2").toString()));
-                                    jsonObject.put("4", (map.get("3").toString()));
-                                    jsonObject.put("5", (map.get("4").toString()));
-                                    jsonObject.put("6", (map.get("5").toString()));
-                                    jsonObject.put("7", (map.get("6").toString()));
-                                    jsonObject.put("8", (map.get("7").toString()));
-                                    jsonObject.put("9", (map.get("8").toString()));
-                                    BaseGetData baseGetData = new BaseGetData(new DataGetFinish() {
-                                        @Override
-                                        public void dataGetFinish(JSONObject jsonObject) {
-                                            if(jsonObject == null)
-                                            {
-                                                return;
-                                            }
-                                            Intent intent = new Intent();
-                                            intent.putExtra("json",jsonObject.toString());
-                                            startActivity("TotalEvaluate",intent);
-                                        }
-                                        @Override
-                                        public void IOException() {
-                                            isLianjieWangluo();
-                                        }
-                                    }, HttpPostUri.home_chose_question_uri, jsonObject.toString());
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }else {
-                                Intent intent = new Intent();
-                                startActivity("ChoiceQuestion", intent);
-                                EntranceActivity.isNeedToPay = false;
-                                finish();
-                            }
+                             isNeedChoiceQuestion();
                         } else {
                             //付款失败
                             showUserChoiceAndExe();
@@ -228,7 +157,55 @@ public class PaidActivity extends BaseActivity implements View.OnClickListener {
         }
 
     }
+   //判断是否需要进入环境选择,如果是跟换家庭成员就不需要,
+    //跟换家庭成员也只需进入注册界面即可
+    public void isNeedChoiceQuestion(){
+        if(MyStaticData.isGHJTCY)
+        {//取出之前保存的选择题的每一个答案
+            Map<String,String> map = UserDataSharedPreferences.getChoiceMap(PaidActivity.this);
+            JSONObject jsonObject = new JSONObject();
+            try {
+                //获取用户ID
+                SharedPreferences sp = getSharedPreferences("homeOwnerInfo", Application.MODE_APPEND);
+                String homeOwnerId = sp.getString("homeOwnerId", "");
+                jsonObject.put("homeOwnerId", homeOwnerId);
+                jsonObject.put("1", (map.get("0").toString()));
+                jsonObject.put("2", (map.get("1").toString()));
+                jsonObject.put("3", (map.get("2").toString()));
+                jsonObject.put("4", (map.get("3").toString()));
+                jsonObject.put("5", (map.get("4").toString()));
+                jsonObject.put("6", (map.get("5").toString()));
+                jsonObject.put("7", (map.get("6").toString()));
+                jsonObject.put("8", (map.get("7").toString()));
+                jsonObject.put("9", (map.get("8").toString()));
 
+                //提交选择题信息
+                BaseGetData baseGetData = new BaseGetData(new DataGetFinish() {
+                    @Override
+                    public void dataGetFinish(JSONObject jsonObject) {
+                        if(jsonObject == null)
+                        {
+                            return;
+                        }
+                        Intent intent = new Intent();
+                        intent.putExtra("json",jsonObject.toString());
+                        startActivity("TotalEvaluate",intent);
+                    }
+                    @Override
+                    public void IOException() {
+                        isLianjieWangluo();
+                    }
+                }, HttpPostUri.home_chose_question_uri, jsonObject.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else {
+            Intent intent = new Intent();
+            startActivity("ChoiceQuestion", intent);
+            EntranceActivity.isNeedToPay = false;
+            finish();
+        }
+    }
     public void showUserChoiceAndExe() {
         runOnUiThread(new Runnable() {
             @Override
@@ -237,17 +214,6 @@ public class PaidActivity extends BaseActivity implements View.OnClickListener {
                     @Override
                     //重新付款
                     public void ensure() {
-//                        webView.loadUrl(pay_uri);
-//                        BasePayGetData bd = new BasePayGetData(new DataGetFinish() {
-//                            @Override
-//                            public void dataGetFinish(JSONObject jsonObject) {
-//
-//                            }
-//                            @Override
-//                            public void IOException() {
-//                                isLianjieWangluo();
-//                            }
-//                        }, pay_uri);
                     }
                     //回到主页
                     @Override

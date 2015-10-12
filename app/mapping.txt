@@ -7460,16 +7460,32 @@ com.haipeng.geomancy.data.BaseGetData$GetData -> com.haipeng.geomancy.d.b:
     void onPostExecute(org.json.JSONObject) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.haipeng.geomancy.data.BasePayPostData -> com.haipeng.geomancy.d.c:
+com.haipeng.geomancy.data.BasePayGetData -> com.haipeng.geomancy.d.c:
     com.haipeng.geomancy.MyInterface.DataGetFinish mdgf -> a
     org.json.JSONObject getJsonData -> b
-com.haipeng.geomancy.data.BasePayPostData$GetData -> com.haipeng.geomancy.d.d:
+com.haipeng.geomancy.data.BasePayGetData$GetData -> com.haipeng.geomancy.d.d:
+    com.haipeng.geomancy.data.BasePayGetData this$0 -> a
+    org.json.JSONObject doInBackground(java.lang.String[]) -> a
+    void onPostExecute(org.json.JSONObject) -> a
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.haipeng.geomancy.data.BasePayPostData -> com.haipeng.geomancy.d.e:
+    com.haipeng.geomancy.MyInterface.DataGetFinish mdgf -> a
+    org.json.JSONObject getJsonData -> b
+    android.support.v7.app.ActionBarActivity mContext -> c
+    java.lang.String ua -> d
+    void getUserAgent(android.support.v7.app.ActionBarActivity) -> a
+com.haipeng.geomancy.data.BasePayPostData$1 -> com.haipeng.geomancy.d.f:
+    android.support.v7.app.ActionBarActivity val$context -> a
+    com.haipeng.geomancy.data.BasePayPostData this$0 -> b
+    void run() -> run
+com.haipeng.geomancy.data.BasePayPostData$GetData -> com.haipeng.geomancy.d.g:
     com.haipeng.geomancy.data.BasePayPostData this$0 -> a
     org.json.JSONObject doInBackground(java.lang.String[]) -> a
     void onPostExecute(org.json.JSONObject) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.haipeng.geomancy.data.HttpPostUri -> com.haipeng.geomancy.d.e:
+com.haipeng.geomancy.data.HttpPostUri -> com.haipeng.geomancy.d.h:
     java.lang.String Data_Ip -> a
     java.lang.String home_chose_uri -> b
     java.lang.String home_xialingshi_uri -> c
@@ -7481,9 +7497,9 @@ com.haipeng.geomancy.data.HttpPostUri -> com.haipeng.geomancy.d.e:
     java.lang.String PAY_Ip -> i
     java.lang.String pay_uri -> j
     java.lang.String get_pay_uri -> k
-com.haipeng.geomancy.data.MyConstants -> com.haipeng.geomancy.d.f:
+com.haipeng.geomancy.data.MyConstants -> com.haipeng.geomancy.d.i:
     java.lang.String ToRegisterFlag -> a
-com.haipeng.geomancy.data.MyStaticData -> com.haipeng.geomancy.d.g:
+com.haipeng.geomancy.data.MyStaticData -> com.haipeng.geomancy.d.j:
     boolean isGHJTCY -> a
 com.haipeng.geomancy.entity.ChoiceQuestionInfo -> com.haipeng.geomancy.e.a:
     java.lang.String title -> a
@@ -7822,9 +7838,15 @@ com.haipeng.geomancy.ui.ChoiceQuestion -> com.haipeng.geomancy.ui.ChoiceQuestion
     void onDestroy() -> onDestroy
     java.lang.String setJosonValue(java.lang.String) -> b
     void onClick(android.view.View) -> onClick
+    void testIsHadPaid() -> q
+    boolean GetPayData(org.json.JSONObject) -> a
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
 com.haipeng.geomancy.ui.ChoiceQuestion$1 -> com.haipeng.geomancy.ui.n:
+    com.haipeng.geomancy.ui.ChoiceQuestion this$0 -> a
+    void dataGetFinish(org.json.JSONObject) -> a
+    void IOException() -> a
+com.haipeng.geomancy.ui.ChoiceQuestion$2 -> com.haipeng.geomancy.ui.o:
     com.haipeng.geomancy.ui.ChoiceQuestion this$0 -> a
     void dataGetFinish(org.json.JSONObject) -> a
     void IOException() -> a
@@ -7845,7 +7867,7 @@ com.haipeng.geomancy.ui.EntranceActivity -> com.haipeng.geomancy.ui.EntranceActi
     void onClick(android.view.View) -> onClick
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-com.haipeng.geomancy.ui.EntranceActivity$1 -> com.haipeng.geomancy.ui.o:
+com.haipeng.geomancy.ui.EntranceActivity$1 -> com.haipeng.geomancy.ui.p:
     com.haipeng.geomancy.ui.EntranceActivity this$0 -> a
     void ensure() -> a
     void cancel() -> b
@@ -7865,21 +7887,21 @@ com.haipeng.geomancy.ui.GuideActivity -> com.haipeng.geomancy.ui.GuideActivity:
     void onPause() -> onPause
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-com.haipeng.geomancy.ui.GuideActivity$1 -> com.haipeng.geomancy.ui.p:
+com.haipeng.geomancy.ui.GuideActivity$1 -> com.haipeng.geomancy.ui.q:
     com.haipeng.geomancy.ui.GuideActivity this$0 -> a
     int getCount() -> a
     boolean isViewFromObject(android.view.View,java.lang.Object) -> a
     void destroyItem(android.view.ViewGroup,int,java.lang.Object) -> a
     java.lang.Object instantiateItem(android.view.ViewGroup,int) -> a
-com.haipeng.geomancy.ui.GuideActivity$2 -> com.haipeng.geomancy.ui.q:
+com.haipeng.geomancy.ui.GuideActivity$2 -> com.haipeng.geomancy.ui.r:
     com.haipeng.geomancy.ui.GuideActivity this$0 -> a
     void onPageScrolled(int,float,int) -> a
     void onPageSelected(int) -> a
     void onPageScrollStateChanged(int) -> b
-com.haipeng.geomancy.ui.GuideActivity$3 -> com.haipeng.geomancy.ui.r:
+com.haipeng.geomancy.ui.GuideActivity$3 -> com.haipeng.geomancy.ui.s:
     com.haipeng.geomancy.ui.GuideActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.haipeng.geomancy.ui.GuideActivity$MyTimeTask -> com.haipeng.geomancy.ui.s:
+com.haipeng.geomancy.ui.GuideActivity$MyTimeTask -> com.haipeng.geomancy.ui.t:
     com.haipeng.geomancy.ui.GuideActivity this$0 -> a
     void run() -> run
 com.haipeng.geomancy.ui.MainActivity -> com.haipeng.geomancy.ui.MainActivity:
@@ -7906,15 +7928,16 @@ com.haipeng.geomancy.ui.MainActivity -> com.haipeng.geomancy.ui.MainActivity:
     void onClick(android.view.View) -> onClick
     void send(java.lang.String) -> b
     void panduanIsHaidPaidNotGetServiced() -> q
+    void startRegisterActivity(boolean) -> b
     void sendSuccess(org.json.JSONObject) -> a
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
     boolean GetPayData(org.json.JSONObject) -> b
-com.haipeng.geomancy.ui.MainActivity$1 -> com.haipeng.geomancy.ui.t:
+com.haipeng.geomancy.ui.MainActivity$1 -> com.haipeng.geomancy.ui.u:
     com.haipeng.geomancy.ui.MainActivity this$0 -> a
     void dataGetFinish(org.json.JSONObject) -> a
     void IOException() -> a
-com.haipeng.geomancy.ui.MainActivity$2 -> com.haipeng.geomancy.ui.u:
+com.haipeng.geomancy.ui.MainActivity$2 -> com.haipeng.geomancy.ui.v:
     com.haipeng.geomancy.ui.MainActivity this$0 -> a
     void dataGetFinish(org.json.JSONObject) -> a
     void IOException() -> a
@@ -7938,7 +7961,7 @@ com.haipeng.geomancy.ui.OverActivity -> com.haipeng.geomancy.ui.OverActivity:
     void onClick(android.view.View) -> onClick
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-com.haipeng.geomancy.ui.OverActivity$1 -> com.haipeng.geomancy.ui.v:
+com.haipeng.geomancy.ui.OverActivity$1 -> com.haipeng.geomancy.ui.w:
     com.haipeng.geomancy.ui.OverActivity this$0 -> a
     void onClick(android.view.View) -> onClick
 com.haipeng.geomancy.ui.PaidActivity -> com.haipeng.geomancy.ui.PaidActivity:
@@ -7961,37 +7984,42 @@ com.haipeng.geomancy.ui.PaidActivity -> com.haipeng.geomancy.ui.PaidActivity:
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
     void onClick(android.view.View) -> onClick
-    void showUserChoiceAndExe() -> q
+    void isNeedChoiceQuestion() -> q
+    void showUserChoiceAndExe() -> r
     boolean GetPayData(org.json.JSONObject) -> a
     void onDestroy() -> onDestroy
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
-com.haipeng.geomancy.ui.PaidActivity$1 -> com.haipeng.geomancy.ui.w:
+com.haipeng.geomancy.ui.PaidActivity$1 -> com.haipeng.geomancy.ui.x:
+    com.haipeng.geomancy.ui.PaidActivity this$0 -> a
+    void dataGetFinish(org.json.JSONObject) -> a
+    void IOException() -> a
+com.haipeng.geomancy.ui.PaidActivity$2 -> com.haipeng.geomancy.ui.y:
     com.haipeng.geomancy.ui.PaidActivity this$0 -> a
     boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
     void onPageFinished(android.webkit.WebView,java.lang.String) -> onPageFinished
-com.haipeng.geomancy.ui.PaidActivity$2 -> com.haipeng.geomancy.ui.x:
-    com.haipeng.geomancy.ui.PaidActivity this$0 -> a
-    void dataGetFinish(org.json.JSONObject) -> a
-    void IOException() -> a
-com.haipeng.geomancy.ui.PaidActivity$2$1 -> com.haipeng.geomancy.ui.y:
-    com.haipeng.geomancy.ui.PaidActivity$2 this$1 -> a
-    void dataGetFinish(org.json.JSONObject) -> a
-    void IOException() -> a
 com.haipeng.geomancy.ui.PaidActivity$3 -> com.haipeng.geomancy.ui.z:
     com.haipeng.geomancy.ui.PaidActivity this$0 -> a
-    void run() -> run
-com.haipeng.geomancy.ui.PaidActivity$3$1 -> com.haipeng.geomancy.ui.aa:
-    com.haipeng.geomancy.ui.PaidActivity$3 this$1 -> a
-    void ensure() -> a
-    void cancel() -> b
-com.haipeng.geomancy.ui.PaidActivity$4 -> com.haipeng.geomancy.ui.ab:
+    void dataGetFinish(org.json.JSONObject) -> a
+    void IOException() -> a
+com.haipeng.geomancy.ui.PaidActivity$4 -> com.haipeng.geomancy.ui.aa:
+    com.haipeng.geomancy.ui.PaidActivity this$0 -> a
+    void dataGetFinish(org.json.JSONObject) -> a
+    void IOException() -> a
+com.haipeng.geomancy.ui.PaidActivity$5 -> com.haipeng.geomancy.ui.ab:
     com.haipeng.geomancy.ui.PaidActivity this$0 -> a
     void run() -> run
-com.haipeng.geomancy.ui.PaidActivity$4$1 -> com.haipeng.geomancy.ui.ac:
-    com.haipeng.geomancy.ui.PaidActivity$4 this$1 -> a
+com.haipeng.geomancy.ui.PaidActivity$5$1 -> com.haipeng.geomancy.ui.ac:
+    com.haipeng.geomancy.ui.PaidActivity$5 this$1 -> a
     void ensure() -> a
     void cancel() -> b
-com.haipeng.geomancy.ui.PaidActivity$5 -> com.haipeng.geomancy.ui.ad:
+com.haipeng.geomancy.ui.PaidActivity$6 -> com.haipeng.geomancy.ui.ad:
+    com.haipeng.geomancy.ui.PaidActivity this$0 -> a
+    void run() -> run
+com.haipeng.geomancy.ui.PaidActivity$6$1 -> com.haipeng.geomancy.ui.ae:
+    com.haipeng.geomancy.ui.PaidActivity$6 this$1 -> a
+    void ensure() -> a
+    void cancel() -> b
+com.haipeng.geomancy.ui.PaidActivity$7 -> com.haipeng.geomancy.ui.af:
     com.haipeng.geomancy.ui.PaidActivity this$0 -> a
     void ensure() -> a
     void cancel() -> b
@@ -8002,8 +8030,8 @@ com.haipeng.geomancy.ui.RegisterActivity -> com.haipeng.geomancy.ui.RegisterActi
     java.lang.String home_region_city -> q
     java.lang.String home_region_county -> r
     java.lang.String home_birthdy_date -> s
-    java.lang.String home_birthdy__start_time -> W
-    java.lang.String home_birthdy__end_time -> X
+    java.lang.String home_birthdy_start_time -> W
+    java.lang.String home_birthdy_end_time -> X
     boolean has_xialingshi -> Y
     boolean isKnowBirthdayTimeDetail -> Z
     android.widget.EditText et_home_owner_name -> aa
@@ -8065,80 +8093,84 @@ com.haipeng.geomancy.ui.RegisterActivity -> com.haipeng.geomancy.ui.RegisterActi
     void onDestroy() -> onDestroy
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-com.haipeng.geomancy.ui.RegisterActivity$1 -> com.haipeng.geomancy.ui.ae:
+com.haipeng.geomancy.ui.RegisterActivity$1 -> com.haipeng.geomancy.ui.ag:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void dataGetFinish(org.json.JSONObject) -> a
     void IOException() -> a
-com.haipeng.geomancy.ui.RegisterActivity$1$1 -> com.haipeng.geomancy.ui.af:
+com.haipeng.geomancy.ui.RegisterActivity$1$1 -> com.haipeng.geomancy.ui.ah:
     com.haipeng.geomancy.ui.RegisterActivity$1 this$1 -> a
     void run() -> run
-com.haipeng.geomancy.ui.RegisterActivity$10 -> com.haipeng.geomancy.ui.ag:
+com.haipeng.geomancy.ui.RegisterActivity$10 -> com.haipeng.geomancy.ui.ai:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.haipeng.geomancy.ui.RegisterActivity$11 -> com.haipeng.geomancy.ui.ah:
+com.haipeng.geomancy.ui.RegisterActivity$11 -> com.haipeng.geomancy.ui.aj:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
-com.haipeng.geomancy.ui.RegisterActivity$12 -> com.haipeng.geomancy.ui.ai:
+com.haipeng.geomancy.ui.RegisterActivity$12 -> com.haipeng.geomancy.ui.ak:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
-com.haipeng.geomancy.ui.RegisterActivity$13 -> com.haipeng.geomancy.ui.aj:
+com.haipeng.geomancy.ui.RegisterActivity$13 -> com.haipeng.geomancy.ui.al:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-com.haipeng.geomancy.ui.RegisterActivity$14 -> com.haipeng.geomancy.ui.ak:
+com.haipeng.geomancy.ui.RegisterActivity$14 -> com.haipeng.geomancy.ui.am:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
-com.haipeng.geomancy.ui.RegisterActivity$15 -> com.haipeng.geomancy.ui.al:
+com.haipeng.geomancy.ui.RegisterActivity$15 -> com.haipeng.geomancy.ui.an:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void dataGetFinish(org.json.JSONObject) -> a
     void IOException() -> a
-com.haipeng.geomancy.ui.RegisterActivity$15$1 -> com.haipeng.geomancy.ui.am:
+com.haipeng.geomancy.ui.RegisterActivity$15$1 -> com.haipeng.geomancy.ui.ao:
     com.haipeng.geomancy.ui.RegisterActivity$15 this$1 -> a
     void run() -> run
-com.haipeng.geomancy.ui.RegisterActivity$15$2 -> com.haipeng.geomancy.ui.an:
+com.haipeng.geomancy.ui.RegisterActivity$15$2 -> com.haipeng.geomancy.ui.ap:
     com.haipeng.geomancy.ui.RegisterActivity$15 this$1 -> a
     void run() -> run
-com.haipeng.geomancy.ui.RegisterActivity$16 -> com.haipeng.geomancy.ui.ao:
+com.haipeng.geomancy.ui.RegisterActivity$16 -> com.haipeng.geomancy.ui.aq:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void onClickComplete(java.lang.String) -> a
-com.haipeng.geomancy.ui.RegisterActivity$17 -> com.haipeng.geomancy.ui.ap:
+com.haipeng.geomancy.ui.RegisterActivity$17 -> com.haipeng.geomancy.ui.ar:
+    com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
+    void dataGetFinish(org.json.JSONObject) -> a
+    void IOException() -> a
+com.haipeng.geomancy.ui.RegisterActivity$18 -> com.haipeng.geomancy.ui.as:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void ensure() -> a
     void cancel() -> b
-com.haipeng.geomancy.ui.RegisterActivity$18 -> com.haipeng.geomancy.ui.aq:
+com.haipeng.geomancy.ui.RegisterActivity$19 -> com.haipeng.geomancy.ui.at:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void dataGetFinish(org.json.JSONObject) -> a
     void IOException() -> a
-com.haipeng.geomancy.ui.RegisterActivity$18$1 -> com.haipeng.geomancy.ui.ar:
-    com.haipeng.geomancy.ui.RegisterActivity$18 this$1 -> a
+com.haipeng.geomancy.ui.RegisterActivity$19$1 -> com.haipeng.geomancy.ui.au:
+    com.haipeng.geomancy.ui.RegisterActivity$19 this$1 -> a
     void run() -> run
-com.haipeng.geomancy.ui.RegisterActivity$18$2 -> com.haipeng.geomancy.ui.as:
-    com.haipeng.geomancy.ui.RegisterActivity$18 this$1 -> a
+com.haipeng.geomancy.ui.RegisterActivity$19$2 -> com.haipeng.geomancy.ui.av:
+    com.haipeng.geomancy.ui.RegisterActivity$19 this$1 -> a
     void run() -> run
-com.haipeng.geomancy.ui.RegisterActivity$2 -> com.haipeng.geomancy.ui.at:
+com.haipeng.geomancy.ui.RegisterActivity$2 -> com.haipeng.geomancy.ui.aw:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void run() -> run
-com.haipeng.geomancy.ui.RegisterActivity$3 -> com.haipeng.geomancy.ui.au:
+com.haipeng.geomancy.ui.RegisterActivity$3 -> com.haipeng.geomancy.ui.ax:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-com.haipeng.geomancy.ui.RegisterActivity$4 -> com.haipeng.geomancy.ui.av:
+com.haipeng.geomancy.ui.RegisterActivity$4 -> com.haipeng.geomancy.ui.ay:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.haipeng.geomancy.ui.RegisterActivity$5 -> com.haipeng.geomancy.ui.aw:
+com.haipeng.geomancy.ui.RegisterActivity$5 -> com.haipeng.geomancy.ui.az:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-com.haipeng.geomancy.ui.RegisterActivity$6 -> com.haipeng.geomancy.ui.ax:
+com.haipeng.geomancy.ui.RegisterActivity$6 -> com.haipeng.geomancy.ui.ba:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     boolean onEditorAction(android.widget.TextView,int,android.view.KeyEvent) -> onEditorAction
-com.haipeng.geomancy.ui.RegisterActivity$7 -> com.haipeng.geomancy.ui.ay:
+com.haipeng.geomancy.ui.RegisterActivity$7 -> com.haipeng.geomancy.ui.bb:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void onCheckedChanged(android.widget.RadioGroup,int) -> onCheckedChanged
-com.haipeng.geomancy.ui.RegisterActivity$8 -> com.haipeng.geomancy.ui.az:
+com.haipeng.geomancy.ui.RegisterActivity$8 -> com.haipeng.geomancy.ui.bc:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     void onDateSet(android.widget.DatePicker,int,int,int) -> onDateSet
-com.haipeng.geomancy.ui.RegisterActivity$9 -> com.haipeng.geomancy.ui.ba:
+com.haipeng.geomancy.ui.RegisterActivity$9 -> com.haipeng.geomancy.ui.bd:
     com.haipeng.geomancy.ui.RegisterActivity this$0 -> a
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
 com.haipeng.geomancy.ui.TotalEvaluate -> com.haipeng.geomancy.ui.TotalEvaluate:
@@ -8191,11 +8223,11 @@ com.haipeng.geomancy.ui.TotalEvaluate -> com.haipeng.geomancy.ui.TotalEvaluate:
     java.util.List getTtoN() -> q
     void setHaveNotHave(com.haipeng.geomancy.entity.ChoiceQuestionInfo) -> a
     void setYesNot(com.haipeng.geomancy.entity.ChoiceQuestionInfo) -> b
-com.haipeng.geomancy.ui.TotalEvaluate$1 -> com.haipeng.geomancy.ui.bb:
+com.haipeng.geomancy.ui.TotalEvaluate$1 -> com.haipeng.geomancy.ui.be:
     com.haipeng.geomancy.ui.TotalEvaluate this$0 -> a
     void dataGetFinish(org.json.JSONObject) -> a
     void IOException() -> a
-com.haipeng.geomancy.ui.TotalEvaluate$2 -> com.haipeng.geomancy.ui.bc:
+com.haipeng.geomancy.ui.TotalEvaluate$2 -> com.haipeng.geomancy.ui.bf:
     com.haipeng.geomancy.ui.TotalEvaluate this$0 -> a
     void dataGetFinish(org.json.JSONObject) -> a
     void IOException() -> a

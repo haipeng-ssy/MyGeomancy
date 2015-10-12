@@ -44,23 +44,17 @@ import java.util.List;
  */
 public class MainActivity extends BaseActivity implements View.OnClickListener, EnterMainActivitySelect {
 
-    //    ImageView compassView;
+
+    boolean notCanClick = false;
+    boolean result = false;
+
     CompassView compassView;
-    Button btn_top_right;
     Button btn_sv_one, btn_sv_two, btn_sv_three, btn_sv_four;
-//    ImageView iv_compass;
-
     ImageView iv_sv_one, iv_sv_two, iv_sv_three, iv_sv_four;
-
     Bitmap bitmap_home_center;
-    Bitmap bitmap_street_center;
-
-    static float a;
-    TextView tv_dgress;
     ScrollView scrollView_introduce;
 
     JSONObject jsonObject = new JSONObject();
-    boolean result = false;
 
 
     @Override
@@ -71,8 +65,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void initView() {
         setContentView(R.layout.activity_main);
-
-//        compassView = (ImageView) findViewById(R.id.main_activity_compassView);
         compassView = (CompassView) findViewById(R.id.main_activity_compassView);
         scrollView_introduce = (ScrollView) findViewById(R.id.main_activity_sv);
 
@@ -102,7 +94,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         iv_sv_two.setImageBitmap(orientation_two);
         iv_sv_three.setImageBitmap(orientation_three);
         iv_sv_four.setImageBitmap(orientation_four);
-//        btn_sv.setOnClickListener(this);
         btn_sv_one.setOnClickListener(this);
         btn_sv_two.setOnClickListener(this);
         btn_sv_three.setOnClickListener(this);
@@ -164,13 +155,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     public void send(String number) {
-        MyStaticData.isGHJTCY = false;
+
         try {
                 jsonObject.put("phoneHomeId", getPhoneId() + "");
                 jsonObject.put("homeChoose", number);
                 jsonObject.put("point", point);
                 String jsonStr = jsonObject.toString();
-                BaseGetData baseGetData = new BaseGetData(new DataGetFinish() {
+
+            BaseGetData baseGetData = new BaseGetData(new DataGetFinish() {
                     @Override
                     public void dataGetFinish(JSONObject jsonObject) {
                         if(jsonObject == null)
@@ -187,18 +179,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
                     }
                 }, HttpPostUri.home_chose_uri, jsonStr);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-    }
-    boolean notCanClick = false;
-    public void panduanIsHaidPaidNotGetServiced(){
 
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+
+    }
+
+    //判断是否付款还没有获得服务的
+    public void panduanIsHaidPaidNotGetServiced(){
+        //判断homeownerID是否存在，即用户是否已经注册
         if (!"".equals(UserDataSharedPreferences.querySPUserInfoByStr(this, UserDataSharedPreferences.SP_HOMEOWNERID))) {
             String homeOwnerId = UserDataSharedPreferences.querySPUserInfoByStr(this, UserDataSharedPreferences.SP_HOMEOWNERID);
 
             //检查是否付款
-            BasePayPostData bap = new BasePayPostData(new DataGetFinish() {
+            BasePayPostData bap = new BasePayPostData(MainActivity.this,new DataGetFinish() {
                 @Override
                 public void dataGetFinish(JSONObject jsonObjectInit) {
                     boolean result = false;
@@ -223,16 +218,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     isLianjieWangluo();
                 }
             }, HttpPostUri.get_pay_uri, homeOwnerId);
-        }else{
+
+        }else{ //用户homeownerID为空/未注册/用户不存在
             startRegisterActivity(false);
         }
     }
+
     public void startRegisterActivity(boolean result){
         Intent intent = new Intent();
         intent.putExtra("notCanClick",result);
         startActivity("RegisterActivity", intent);
-
     }
+    //坐向选择，并发送成功
     public void sendSuccess(JSONObject jsonObject) {
         JSONObject jo = jsonObject;
         String result = "0";
@@ -264,6 +261,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
         return super.onOptionsItemSelected(item);
     }
+    //查询该用户是否已经付款，根据homeownerID
     public boolean GetPayData(JSONObject jsonObjectInit){
         boolean result = false;
         try {

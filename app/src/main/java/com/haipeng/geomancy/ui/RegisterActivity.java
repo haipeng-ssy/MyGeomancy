@@ -41,6 +41,7 @@ import com.haipeng.geomancy.data.BaseGetData;
 import com.haipeng.geomancy.data.BasePayPostData;
 import com.haipeng.geomancy.data.HttpPostUri;
 import com.haipeng.geomancy.data.MyConstants;
+import com.haipeng.geomancy.data.MyStaticData;
 import com.haipeng.geomancy.lunarDatePicker.LunarDatePicker;
 import com.haipeng.geomancy.lunarDatePicker.OnClickLunarDateListener;
 import com.haipeng.geomancy.region.HasCompletedCity;
@@ -50,6 +51,8 @@ import com.haipeng.geomancy.region.RegionsDB;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 public class RegisterActivity extends BaseActivity implements View.OnClickListener, HasCompletedProvince, HasCompletedCity {
 
     String home_name;
@@ -58,8 +61,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     String home_region_city = "北京市";
     String home_region_county = "东城区";
     String home_birthdy_date = "";
-    String home_birthdy__start_time = "";
-    String home_birthdy__end_time = "";
+    String home_birthdy_start_time = "";
+    String home_birthdy_end_time = "";
     boolean has_xialingshi = false;
     boolean isKnowBirthdayTimeDetail = true;
 
@@ -100,8 +103,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     int odd = 0;
     TextView tv_title;
     boolean onCreate = false;
-    boolean mHasPaid = false;
-    boolean mHasServiced = false;
     boolean notCanClick = false;
     //普通时间
     String commonTimes[];
@@ -110,27 +111,22 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         onCreate = true;
         notCanClick = getIntent().getBooleanExtra("notCanClick", false);
-        System.out.println("onCreate");
         super.onCreate(savedInstanceState);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        System.out.println("onResume");
-
-//     HideInputManaget();
         panduanIsHaidPaidNotGetServiced();
-
-
     }
 
+    //判断是否付款还没有获得服务的
     public void panduanIsHaidPaidNotGetServiced(){
-
+        //判断homeownerID是否存在，即用户是否已经注册
         if (!"".equals(UserDataSharedPreferences.querySPUserInfoByStr(this, UserDataSharedPreferences.SP_HOMEOWNERID))) {
             String homeOwnerId = UserDataSharedPreferences.querySPUserInfoByStr(this, UserDataSharedPreferences.SP_HOMEOWNERID);
             //检查是否付款
-            BasePayPostData bap = new BasePayPostData(new DataGetFinish() {
+            BasePayPostData bap = new BasePayPostData(RegisterActivity.this,new DataGetFinish() {
                 @Override
                 public void dataGetFinish(JSONObject jsonObjectInit) {
                     boolean result = false;
@@ -138,6 +134,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         return;
                     }
                     result = GetPayData(jsonObjectInit);
+
+                    //查询用户是否已经获取服务
                     String hasServiced = UserDataSharedPreferences.querySPUserInfoByStr(RegisterActivity.this, UserDataSharedPreferences.SP_HADSERVICED);
                     if (result) {
                         if ("true".equals(hasServiced)) {
@@ -392,8 +390,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 commonRadioGroup(R.id.rb_common_time_no,R.id.rb_common_time_yes,false,true);
                 et_birthday_time.setText(viewDetailTime);
                 et_birthday_time.setEnabled(false);
-                home_birthdy__start_time = et_birthday_time.getText().toString();
-                home_birthdy__end_time = et_birthday_time.getText().toString();
+                home_birthdy_start_time = et_birthday_time.getText().toString();
+                home_birthdy_end_time = et_birthday_time.getText().toString();
             }
             ll_time_picker.setEnabled(false);
             ll_common_time.setEnabled(false);
@@ -416,8 +414,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     if (isKnowBirthdayTimeDetail) {
                         String et_detailTime = et_birthday_time.getText().toString();
                         detailTime = et_detailTime;
-                        home_birthdy__start_time = et_birthday_time.getText().toString();
-                        home_birthdy__end_time = et_birthday_time.getText().toString();
+                        home_birthdy_start_time = et_birthday_time.getText().toString();
+                        home_birthdy_end_time = et_birthday_time.getText().toString();
                     }
                 }
             };
@@ -454,8 +452,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         ll_time_picker.setVisibility(View.GONE);
                         ll_common_time.setVisibility(View.VISIBLE);
                         isKnowBirthdayTimeDetail = false;
-                        home_birthdy__start_time = "00:25";
-                        home_birthdy__end_time = "00:25";
+                        home_birthdy_start_time = "00:25";
+                        home_birthdy_end_time = "00:25";
                     }
                 }
             });
@@ -563,8 +561,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         }
     }
     public void setBirTime(String startTime, String endTime) {
-        home_birthdy__start_time = startTime;
-        home_birthdy__end_time = endTime;
+        home_birthdy_start_time = startTime;
+        home_birthdy_end_time = endTime;
     }
     public void panduanCommontime(int position) {
         switch (position) {
@@ -669,16 +667,56 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rigister_sign_up:
-                if (notCanClick) {
+                if (notCanClick) {//不能点击
+                    if (MyStaticData.isGHJTCY) {
+
+                        //取出之前保存的选择题的每一个答案，更换家庭成员，不用再次选择外部环境
+                        Map<String, String> map = UserDataSharedPreferences.getChoiceMap(RegisterActivity.this);
+
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            SharedPreferences sp = getSharedPreferences("homeOwnerInfo", Application.MODE_APPEND);
+                            String homeOwnerId = sp.getString("homeOwnerId", "");
+                            jsonObject.put("homeOwnerId", homeOwnerId);
+                            jsonObject.put("1", (map.get("0").toString()));
+                            jsonObject.put("2", (map.get("1").toString()));
+                            jsonObject.put("3", (map.get("2").toString()));
+                            jsonObject.put("4", (map.get("3").toString()));
+                            jsonObject.put("5", (map.get("4").toString()));
+                            jsonObject.put("6", (map.get("5").toString()));
+                            jsonObject.put("7", (map.get("6").toString()));
+                            jsonObject.put("8", (map.get("7").toString()));
+                            jsonObject.put("9", (map.get("8").toString()));
+
+                            //提交选择题的答案
+                            BaseGetData baseGetData = new BaseGetData(new DataGetFinish() {
+                                @Override
+                                public void dataGetFinish(JSONObject jsonObject) {
+                                    if (jsonObject == null) {
+                                        return;
+                                    }
+                                    Intent intent = new Intent();
+                                    intent.putExtra("json", jsonObject.toString());
+                                    startActivity("TotalEvaluate", intent);
+                                }
+                                @Override
+                                public void IOException() {
+                                    isLianjieWangluo();
+                                }
+                            }, HttpPostUri.home_chose_question_uri, jsonObject.toString());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }else {
                     Intent intent = new Intent();
                     startActivity("ChoiceQuestion", intent);
+                    }
                 } else {
                     showMyAlterDialog(new EnsureCancel() {
                         @Override
                         public void ensure() {
                             signUp();
                         }
-
                         @Override
                         public void cancel() {
 
@@ -693,18 +731,26 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         final JSONObject obj = new JSONObject();
         home_name = et_home_owner_name.getText().toString();
+
+        /**
+         * 注册信息相关的空判断
+         * */
         if (isNullPanduan(home_name, "姓名")) {
             return;
         }
         if (isNullPanduan(home_birthdy_date, "日期")) {
             return;
         }
-        if (isNullPanduan(home_birthdy__start_time, "请选择时间")) {
+        if (isNullPanduan(et_birthday_time.getText().toString(), "请选择时间")) {
             return;
         }
-        if (isNullPanduan(home_birthdy__end_time, "请选择时间")) {
+        if (isNullPanduan(home_birthdy_start_time, "请选择时间")) {
             return;
         }
+        if (isNullPanduan(home_birthdy_end_time, "请选择时间")) {
+            return;
+        }
+
         try {
             obj.put("phoneHomeId", getPhoneId());
             obj.put("name", home_name);
@@ -725,15 +771,18 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             UserDataSharedPreferences.insertSPUserInfoByStr(RegisterActivity.this, UserDataSharedPreferences.SP_USERKONWDETAILTIME, isBoolean("isDetailTime"));
             obj.put("isDayLightTime", isBoolean("isDayLightTime"));
             UserDataSharedPreferences.insertSPUserInfoByStr(RegisterActivity.this, UserDataSharedPreferences.SP_USERXIA, isBoolean("isDayLightTime"));
-            obj.put("birStartTime", home_birthdy__start_time);
-            UserDataSharedPreferences.insertSPUserInfoByStr(RegisterActivity.this, UserDataSharedPreferences.SP_USERSTARTTIME, home_birthdy__start_time);
-            obj.put("birEndTime", home_birthdy__end_time);
-            UserDataSharedPreferences.insertSPUserInfoByStr(RegisterActivity.this, UserDataSharedPreferences.SP_USERENDTIME, home_birthdy__end_time);
+            obj.put("birStartTime", home_birthdy_start_time);
+            UserDataSharedPreferences.insertSPUserInfoByStr(RegisterActivity.this, UserDataSharedPreferences.SP_USERSTARTTIME, home_birthdy_start_time);
+            obj.put("birEndTime", home_birthdy_end_time);
+
+            //保存用户注册的信息
+            UserDataSharedPreferences.insertSPUserInfoByStr(RegisterActivity.this, UserDataSharedPreferences.SP_USERENDTIME, home_birthdy_end_time);
+
             String homeOwnerId = getPhoneId() + System.currentTimeMillis();
             Log.i("homeOwnerId_pinyin", homeOwnerId);
             obj.put("homeOwnerId", homeOwnerId);
             if ("0".equals(isBoolean("isDetailTime"))) {
-                UserDataSharedPreferences.insertSPUserInfoByStr(RegisterActivity.this, UserDataSharedPreferences.SP_USERBIRDETAILTIME, home_birthdy__start_time);
+                UserDataSharedPreferences.insertSPUserInfoByStr(RegisterActivity.this, UserDataSharedPreferences.SP_USERBIRDETAILTIME, home_birthdy_start_time);
             }
             if ("1".equals(isBoolean("isDetailTime"))) {
                 UserDataSharedPreferences.insertSPUserInfoByStr(RegisterActivity.this, UserDataSharedPreferences.SP_USERBIRDETAILTIME, detailTime);
@@ -743,6 +792,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //提交注册信息进行注册
         BaseGetData baseGetData = new BaseGetData(new DataGetFinish() {
             @Override
             public void dataGetFinish(JSONObject jsonObject) {
@@ -750,6 +801,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     return;
                 }
                 JSONObject getJsonData = jsonObject;
+
+                //保存用户id,即是homeOwnerId
                 SharedPreferences sp = getSharedPreferences("homeOwnerInfo", Application.MODE_APPEND);
                 SharedPreferences.Editor editor = sp.edit();
                 if (sp.getAll().size() == 0) {
@@ -793,6 +846,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         }, HttpPostUri.register_uri, obj.toString());
     }
 
+    //查询该用户是否已经付款，根据homeownerID
     public boolean GetPayData(JSONObject jsonObjectInit) {
         boolean result = false;
         try {

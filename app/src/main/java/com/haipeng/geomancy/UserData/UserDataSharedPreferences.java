@@ -67,6 +67,7 @@ public class UserDataSharedPreferences {
         editor.commit();
     }
 
+    //保存用户注册的信息，是否获取服务等
     public static void insertSPUserInfoByStr(Context context,String userColumn,String userValue) {
         SharedPreferences sp = context.getSharedPreferences("UserInfo", Application.MODE_APPEND);
         SharedPreferences.Editor editor = sp.edit();

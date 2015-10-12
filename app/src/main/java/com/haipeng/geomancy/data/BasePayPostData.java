@@ -1,8 +1,13 @@
 package com.haipeng.geomancy.data;
 
 import android.accounts.NetworkErrorException;
+import android.content.Context;
+import android.drm.ProcessedData;
 import android.os.AsyncTask;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import com.haipeng.geomancy.MyInterface.DataGetFinish;
 
@@ -14,6 +19,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentProducer;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -26,6 +32,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by Sunyiyan on 2015/1/31.
@@ -34,12 +41,31 @@ public class BasePayPostData {
     DataGetFinish mdgf;
     String mUri, mJsonParams, mAttationStr;
     JSONObject getJsonData = null;
+    ActionBarActivity mContext;
     //查询用户付款信息
     //post方式
-    public BasePayPostData(DataGetFinish dgf, String uri, String userId) {
+    public BasePayPostData(ActionBarActivity context,DataGetFinish dgf, String uri, String userId) {
         mdgf = dgf;
+        mContext = context;
         String[] params = {uri, userId};
+        getUserAgent(mContext);
         new GetData().execute(params);
+
+    }
+    String ua;
+    public void getUserAgent(final ActionBarActivity context){
+        context.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                WebView webView = new WebView(context);
+//        webView.layout(0,0,0,0);
+                WebSettings settings = webView.getSettings();
+                ua = settings.getUserAgentString();
+
+            }
+        });
+        Log.i("tag","ua = "+ua);
+
     }
 
     public class GetData extends AsyncTask<String, Integer, JSONObject> {
@@ -50,11 +76,11 @@ public class BasePayPostData {
 //            httpPost.addHeader("Accept-Language", "zh-CN,zh;q=0.8");
 //            httpPost.addHeader("Connection", " Keep-Alive");
 //            httpPost.addHeader("Cache-Control", "max-age=0");
-            //httpPost.addHeader("Referer", "http://layl.kaydong.com/default.aspx");
             HttpClient httpClient = new DefaultHttpClient();
+
             HttpPost httpPost = new HttpPost(params[0]);
             httpPost.addHeader("Referer", "http://sj.layl.cn/default.aspx");
-            httpPost.addHeader("User-Agent", "Mozilla/5.0");
+            httpPost.addHeader("User-Agent", ua);
             HttpResponse response;
             try {
 

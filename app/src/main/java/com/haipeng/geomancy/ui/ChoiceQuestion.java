@@ -41,6 +41,11 @@ public class ChoiceQuestion extends BaseActivity implements View.OnClickListener
     Map<String, String> map = new HashMap<String, String>();
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public void hideActionBar() {
         super.hideActionBar();
     }
@@ -95,6 +100,11 @@ public class ChoiceQuestion extends BaseActivity implements View.OnClickListener
 //        setListViewHight(lv_choice);
     }
 
+    @Override
+    public void execute() {
+
+    }
+
     public void setHaveNotHave(ChoiceQuestionInfo choiceQuestionInfo) {
         choiceQuestionInfo.setChoice_first("有");
         choiceQuestionInfo.setChoice_second("无");
@@ -103,18 +113,6 @@ public class ChoiceQuestion extends BaseActivity implements View.OnClickListener
     public void setYesNot(ChoiceQuestionInfo choiceQuestionInfo) {
         choiceQuestionInfo.setChoice_first("是");
         choiceQuestionInfo.setChoice_second("否");
-    }
-
-
-    @Override
-    public void execute() {
-
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -186,6 +184,7 @@ public class ChoiceQuestion extends BaseActivity implements View.OnClickListener
                 map = choiceAdapter.getMap();
                 JSONObject jsonObject = new JSONObject();
                 try {
+
                     SharedPreferences sp = getSharedPreferences("homeOwnerInfo", Application.MODE_APPEND);
                     String homeOwnerId = sp.getString("homeOwnerId", "");
                     jsonObject.put("homeOwnerId", homeOwnerId);
@@ -217,6 +216,7 @@ public class ChoiceQuestion extends BaseActivity implements View.OnClickListener
                     jsonObject.put("9", setJosonValue(map.get("8").toString()));
                     choiceMap.put("8", setJosonValue(map.get("8").toString()));
 
+                    //保存选择题的答案
                     UserDataSharedPreferences.setChoiceMap(ChoiceQuestion.this, choiceMap);
 
                     BaseGetData baseGetData = new BaseGetData(new DataGetFinish() {
@@ -250,7 +250,7 @@ public class ChoiceQuestion extends BaseActivity implements View.OnClickListener
     public void testIsHadPaid() {
         String homeOwnerId = UserDataSharedPreferences.querySPUserInfoByStr(this, UserDataSharedPreferences.SP_HOMEOWNERID);
         //检查是否付款
-        BasePayPostData bap = new BasePayPostData(new DataGetFinish() {
+        BasePayPostData bap = new BasePayPostData(ChoiceQuestion.this,new DataGetFinish() {
             @Override
             public void dataGetFinish(JSONObject jsonObjectInit) {
                 boolean result = false;
@@ -305,6 +305,7 @@ public class ChoiceQuestion extends BaseActivity implements View.OnClickListener
         }
         return result;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

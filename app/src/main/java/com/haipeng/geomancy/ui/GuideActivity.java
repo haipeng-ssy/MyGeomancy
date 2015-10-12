@@ -39,11 +39,6 @@ public class GuideActivity extends BaseActivity {
     List<ImageView> imageViewsList;
 
     Button guide_btn;
-    TextView tv_agree;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +76,7 @@ public class GuideActivity extends BaseActivity {
 
     @Override
     public void execute() {
-
-        /*
-        * 传感器的Listener
-        * */
-
-
-         /**
+     /**
          * ViewPager的PagerAdapter
          */
         PagerAdapter pagerAdapter = new PagerAdapter() {

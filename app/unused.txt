@@ -3107,8 +3107,10 @@ com.haipeng.geomancy.data.BaseGetData:
     java.lang.String mUri
     java.lang.String mJsonParams
     java.lang.String mAttationStr
-com.haipeng.geomancy.data.BasePayGetData
-com.haipeng.geomancy.data.BasePayGetData$GetData
+com.haipeng.geomancy.data.BasePayGetData:
+    java.lang.String mUri
+    java.lang.String mJsonParams
+    java.lang.String mAttationStr
 com.haipeng.geomancy.data.BasePayPostData:
     java.lang.String mUri
     java.lang.String mJsonParams
@@ -3194,8 +3196,8 @@ com.haipeng.geomancy.ui.CameraContentActivity:
     double latitude
     double altitude
 com.haipeng.geomancy.ui.ChoiceQuestion:
-    43:44:public void hideActionBar()
-    137:157:public void setListViewHight(android.widget.ListView)
+    45:46:public void hideActionBar()
+    138:158:public void setListViewHight(android.widget.ListView)
 com.haipeng.geomancy.ui.EntranceActivity:
     long a_time
     android.widget.PopupWindow popupWindow
@@ -3215,7 +3217,7 @@ com.haipeng.geomancy.ui.TotalEvaluate:
     java.lang.String home_towards
     android.graphics.Typeface ttf_song
     com.haipeng.geomancy.adapter.EvaluteAdapter evaluteAdapter
-    110:130:public static void setListViewHeightBasedOnChildren(com.haipeng.geomancy.util.MyListView)
+    113:133:public static void setListViewHeightBasedOnChildren(com.haipeng.geomancy.util.MyListView)
 com.haipeng.geomancy.util.HanziToPinyin
 com.haipeng.geomancy.util.HanziToPinyin$Token
 com.haipeng.geomancy.util.MyMD5

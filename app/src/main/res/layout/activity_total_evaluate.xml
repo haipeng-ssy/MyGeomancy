@@ -143,14 +143,14 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_home_towards_title"
                     android:textColor="@color/yellow"
                     android:textSize="20sp"
-                    android:layout_width="130dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="房屋朝向" />
 
@@ -159,7 +159,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_toRightOf="@+id/tv_home_towards_title"
-                    android:gravity="center_vertical"
+                    android:gravity="left"
                     android:orientation="horizontal">
 
                     <TextView
@@ -185,7 +185,7 @@
                     android:layout_height="25dp"
                     android:layout_below="@+id/ll_hometowards"
                     android:layout_toRightOf="@+id/tv_home_towards_title"
-                    android:gravity="center_vertical"
+                    android:gravity="left"
                     android:orientation="horizontal">
 
                     <TextView
@@ -211,7 +211,7 @@
                     android:layout_height="25dp"
                     android:layout_below="@id/ll_homeproperty"
                     android:layout_toRightOf="@+id/tv_home_towards_title"
-                    android:gravity="center_vertical"
+                    android:gravity="left"
                     android:orientation="horizontal"
 
                     >
@@ -239,7 +239,7 @@
                     android:layout_height="75dp"
                     android:layout_below="@+id/ll_homeownerproperty"
                     android:layout_toRightOf="@+id/tv_home_towards_title"
-                    android:gravity="center_vertical"
+                    android:gravity="left"
                     android:orientation="horizontal">
 
 
@@ -249,14 +249,13 @@
                         android:textSize="20sp"
                         android:layout_width="wrap_content"
                         android:layout_height="75dp"
-
                         android:text="宅命配合: " />
 
                     <TextView
                         android:id="@+id/tv_homelife"
                         style="@style/TextViewStyleWhiteSmallsp"
                         android:layout_width="wrap_content"
-                        android:layout_height="75dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="2dp" />
                 </LinearLayout>
 

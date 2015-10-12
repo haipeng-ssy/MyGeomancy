@@ -96,15 +96,7 @@ public class CameraContentActivity extends BaseActivity implements SurfaceHolder
         ttf_lishu = Typeface.createFromAsset(getAssets(),"fonts/lishu.ttf");
         scroll_one_ll = (LinearLayout) findViewById(R.id.camera_content_scroll_one_ll);
     }
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            Intent intent = new Intent();
-            startActivity("AppUserEvaluateActivity",intent);
-        }
-        return true;
-    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -112,13 +104,14 @@ public class CameraContentActivity extends BaseActivity implements SurfaceHolder
         scroll_one_ll.setOnClickListener(this);
     }
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-    @Override
     protected void onPause() {
         super.onPause();
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     @Override
     public void initView() {
         setContentView(R.layout.activity_camera_content);
@@ -154,6 +147,8 @@ public class CameraContentActivity extends BaseActivity implements SurfaceHolder
         tv_avoid = (TextView) findViewById(R.id.tv_avoid);
         tv_yearmonth = (TextView) findViewById(R.id.tv_yearmonth);
         tv_null  = (TextView) findViewById(R.id.tv_null);
+
+        MyStaticData.isGHJTCY = false;
     }
     @Override
     public void setUpView() {
@@ -180,9 +175,8 @@ public class CameraContentActivity extends BaseActivity implements SurfaceHolder
 
     @Override
     public void execute() {
-//        testGPS(gpsTV);
-//        camera_content_imageView.setImageBitmap(img);
-         try {
+
+        try {
              JSONObject jsonObject= new JSONObject(jsonString);
              String homeOwnerId =   jsonObject.getString("homeOwnerId");
              String result =   jsonObject.getString("result");
@@ -202,6 +196,8 @@ public class CameraContentActivity extends BaseActivity implements SurfaceHolder
 
                  map_et.put(ja_jo.getString("palace"),et);
              }
+
+             //记录用户已经获取服务
              UserDataSharedPreferences.insertSPUserInfoByStr(CameraContentActivity.this,
                      UserDataSharedPreferences.SP_HADSERVICED, "true");
          }catch (Exception e)
@@ -312,6 +308,7 @@ public class CameraContentActivity extends BaseActivity implements SurfaceHolder
 
     }
 
+    //自定义摄像头
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         //取出后摄像头
@@ -367,10 +364,6 @@ public class CameraContentActivity extends BaseActivity implements SurfaceHolder
 
 
 
-/**
- * GPS start
- * */
-
 
     @Override
     public void onClick(View v) {
@@ -387,7 +380,7 @@ public class CameraContentActivity extends BaseActivity implements SurfaceHolder
                         showMyAlterDialog(new EnsureCancel() {
                             @Override
                             public void ensure() {
-                                MyConstants.ToRegisterFlag = MyConstants.HomeOwnerToRegister;
+//                                MyConstants.ToRegisterFlag = MyConstants.HomeOwnerToRegister;
                                 Intent intent = new Intent();
                                 startActivity("EntranceActivity",intent);
                                 clearSPHomeOwnerId();
@@ -415,10 +408,6 @@ public class CameraContentActivity extends BaseActivity implements SurfaceHolder
     }
 
 
-    /**
- * GPS end
- * */
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_camera_content, menu);
@@ -434,6 +423,16 @@ public class CameraContentActivity extends BaseActivity implements SurfaceHolder
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent intent = new Intent();
+            startActivity("AppUserEvaluateActivity",intent);
+        }
+        return true;
     }
 
 }
