@@ -448,6 +448,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         ll_time_picker.setVisibility(View.VISIBLE);
                         ll_common_time.setVisibility(View.GONE);
                         isKnowBirthdayTimeDetail = true;
+
                     } else {
                         ll_time_picker.setVisibility(View.GONE);
                         ll_common_time.setVisibility(View.VISIBLE);
@@ -669,44 +670,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             case R.id.rigister_sign_up:
                 if (notCanClick) {//不能点击
                     if (MyStaticData.isGHJTCY) {
-
-                        //取出之前保存的选择题的每一个答案，更换家庭成员，不用再次选择外部环境
-                        Map<String, String> map = UserDataSharedPreferences.getChoiceMap(RegisterActivity.this);
-
-                        JSONObject jsonObject = new JSONObject();
-                        try {
-                            SharedPreferences sp = getSharedPreferences("homeOwnerInfo", Application.MODE_APPEND);
-                            String homeOwnerId = sp.getString("homeOwnerId", "");
-                            jsonObject.put("homeOwnerId", homeOwnerId);
-                            jsonObject.put("1", (map.get("0").toString()));
-                            jsonObject.put("2", (map.get("1").toString()));
-                            jsonObject.put("3", (map.get("2").toString()));
-                            jsonObject.put("4", (map.get("3").toString()));
-                            jsonObject.put("5", (map.get("4").toString()));
-                            jsonObject.put("6", (map.get("5").toString()));
-                            jsonObject.put("7", (map.get("6").toString()));
-                            jsonObject.put("8", (map.get("7").toString()));
-                            jsonObject.put("9", (map.get("8").toString()));
-
-                            //提交选择题的答案
-                            BaseGetData baseGetData = new BaseGetData(new DataGetFinish() {
-                                @Override
-                                public void dataGetFinish(JSONObject jsonObject) {
-                                    if (jsonObject == null) {
-                                        return;
-                                    }
-                                    Intent intent = new Intent();
-                                    intent.putExtra("json", jsonObject.toString());
-                                    startActivity("TotalEvaluate", intent);
-                                }
-                                @Override
-                                public void IOException() {
-                                    isLianjieWangluo();
-                                }
-                            }, HttpPostUri.home_chose_question_uri, jsonObject.toString());
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                         executeIsGHJTCY();
                     }else {
                     Intent intent = new Intent();
                     startActivity("ChoiceQuestion", intent);
@@ -727,6 +691,46 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+    public void executeIsGHJTCY(){
+
+        //取出之前保存的选择题的每一个答案，更换家庭成员，不用再次选择外部环境
+        Map<String, String> map = UserDataSharedPreferences.getChoiceMap(RegisterActivity.this);
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            SharedPreferences sp = getSharedPreferences("homeOwnerInfo", Application.MODE_APPEND);
+            String homeOwnerId = sp.getString("homeOwnerId", "");
+            jsonObject.put("homeOwnerId", homeOwnerId);
+            jsonObject.put("1", (map.get("0").toString()));
+            jsonObject.put("2", (map.get("1").toString()));
+            jsonObject.put("3", (map.get("2").toString()));
+            jsonObject.put("4", (map.get("3").toString()));
+            jsonObject.put("5", (map.get("4").toString()));
+            jsonObject.put("6", (map.get("5").toString()));
+            jsonObject.put("7", (map.get("6").toString()));
+            jsonObject.put("8", (map.get("7").toString()));
+            jsonObject.put("9", (map.get("8").toString()));
+
+            //提交选择题的答案
+            BaseGetData baseGetData = new BaseGetData(new DataGetFinish() {
+                @Override
+                public void dataGetFinish(JSONObject jsonObject) {
+                    if (jsonObject == null) {
+                        return;
+                    }
+                    Intent intent = new Intent();
+                    intent.putExtra("json", jsonObject.toString());
+                    startActivity("TotalEvaluate", intent);
+                }
+                @Override
+                public void IOException() {
+                    isLianjieWangluo();
+                }
+            }, HttpPostUri.home_chose_question_uri, jsonObject.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void signUp(){
 
         final JSONObject obj = new JSONObject();
@@ -741,13 +745,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         if (isNullPanduan(home_birthdy_date, "日期")) {
             return;
         }
-        if (isNullPanduan(et_birthday_time.getText().toString(), "请选择时间")) {
+
+        if (isKnowBirthdayTimeDetail&&isNullPanduan(et_birthday_time.getText().toString(), "时间")) {
             return;
         }
-        if (isNullPanduan(home_birthdy_start_time, "请选择时间")) {
+        if (isNullPanduan(home_birthdy_start_time, "时间")) {
             return;
         }
-        if (isNullPanduan(home_birthdy_end_time, "请选择时间")) {
+        if (isNullPanduan(home_birthdy_end_time, "时间")) {
             return;
         }
 
@@ -830,8 +835,19 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                             @Override
                             public void run() {
                                 Toast.makeText(RegisterActivity.this, "注册成功!", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent();
-                                startActivity("PaidActivity", intent);
+                                String money = UserDataSharedPreferences.getPayMoney(RegisterActivity.this);
+                                if(money.equals("0")||money.equals("0.0")||money.equals("0.00")) {
+                                    Intent intent = new Intent();
+                                    if(MyStaticData.isGHJTCY)
+                                    {
+                                        executeIsGHJTCY();
+                                    }else {
+                                        startActivity("ChoiceQuestion", intent);
+                                    }
+                                }else{
+                                    Intent intent = new Intent();
+                                    startActivity("PaidActivity", intent);
+                                }
                             }
                         });
                     }

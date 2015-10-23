@@ -42,7 +42,7 @@ public class PaidActivity extends BaseActivity implements View.OnClickListener {
     WebView webView;
     String UserId = "";
     String payTitle = "手机测风水";
-    String payMoney = "0.01";
+    String payMoney = "0.02";
     String pay_uri = "";
 
     @Override
@@ -57,6 +57,8 @@ public class PaidActivity extends BaseActivity implements View.OnClickListener {
         UserId = sp.getString("homeOwnerId", "");
         btn = (Button) findViewById(R.id.paid_activity_btn);
         webView = (WebView) findViewById(R.id.paid_activity_webview);
+        payMoney = UserDataSharedPreferences.getPayMoney(PaidActivity.this);
+
         pay_uri = HttpPostUri.pay_uri + "UserID=" + UserId + "&payTitle=" + payTitle + "&payMoney=" + payMoney;
     }
 

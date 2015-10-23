@@ -15,7 +15,7 @@ public class HttpPostUri {
     public static final String total_evaluate =Data_Ip+"/Geo/simpleCalculate";
     public static final String eight_towards =Data_Ip+"/Geo/calculate";
     public static final String user_eva_app =Data_Ip+"/Geo/evaluation";
-
+    public static final String get_pay_money = Data_Ip+"/Geo/GetMoney";
     static String PAY_Ip ="http://sj.layl.cn/plus";
     //static String PAY_Ip="http://layl.kaydong.com/plus";
 //    付款链接地址 XXX更换成相应的数据即可

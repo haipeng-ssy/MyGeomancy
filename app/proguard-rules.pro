@@ -104,7 +104,7 @@
     public static <fields>;
 }
 
-
+#防止混淆干扰了JavascriptInterface功能
 -keepclassmembers class * {
     @android.webkit.JavascriptInterface <methods>;
 }

@@ -40,6 +40,8 @@ public class ChoiceQuestion extends BaseActivity implements View.OnClickListener
     ChoiceAdapter choiceAdapter;
     Map<String, String> map = new HashMap<String, String>();
 
+    private static int MYT = 2;
+    private static int MYTH =3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,6 +155,15 @@ public class ChoiceQuestion extends BaseActivity implements View.OnClickListener
         // listView.getDividerHeight()获取子项间分隔符占用的高度
         // params.height最后得到整个ListView完整显示需要的高度
         listView.setLayoutParams(params);
+    }
+
+    public static String getMyF(){
+        int  temp =MYT+MYTH;
+        return String.valueOf(temp);
+    }
+    public static String getMyH(){
+        int  temp = MYTH*2;
+        return String.valueOf(temp);
     }
 
     public String setJosonValue(String str) {

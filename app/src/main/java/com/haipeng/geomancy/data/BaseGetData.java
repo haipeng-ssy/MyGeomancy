@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 /**
  * Created by Sunyiyan on 2015/1/31.
+ * 和两岸易理后台的交互
  */
 public class BaseGetData {
     DataGetFinish mdgf;
@@ -38,8 +39,10 @@ public class BaseGetData {
             HttpResponse response;
             try {
 //                StringEntity se = new StringEntity( params[1].toString());
-                StringEntity se = new StringEntity( params[1].toString(),HTTP.UTF_8);
-                httpPost.setEntity(se);
+                if(!"".equals(params[1].toString())) {
+                    StringEntity se = new StringEntity(params[1].toString(), HTTP.UTF_8);
+                    httpPost.setEntity(se);
+                }
                 response = httpClient.execute(httpPost);
                 Log.d("tag",httpPost.getURI().toString());
                 if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)

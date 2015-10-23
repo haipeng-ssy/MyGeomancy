@@ -1,5 +1,6 @@
 package com.haipeng.geomancy.UserData;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -26,9 +27,11 @@ public class UserDataSharedPreferences {
     public static final String SP_USERSTARTTIME = "userstarttime";
     public static final String SP_USERENDTIME = "userendtime";
     public static final String SP_HADPAID = "userhadpaid";
+    public static String MyQ="2";
     public static final String SP_HADSERVICED = "userhadserviced";
     public static final String SP_HOMEOWNERID = "userhomeownerid";
     public static final String SP_USERBIRDETAILTIME   = "userdetailtime";
+
 
     public static void setChoiceMap(Context context,Map<String,String> map){
         SharedPreferences sp = context.getSharedPreferences("UserQuestions", Application.MODE_APPEND);
@@ -60,6 +63,14 @@ public class UserDataSharedPreferences {
         return map;
     }
 
+    public static String getMyNet(Context context,String net){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyNet", Application.MODE_APPEND);
+        String one = sharedPreferences.getString("a","");
+        String two = sharedPreferences.getString("e","");
+        String mnet = sharedPreferences.getString(net,"");
+        return  one+two+"1"+mnet;
+    }
+
     public static void clearSPUserInfoByStr(Context context,String userColumn) {
         SharedPreferences sp = context.getSharedPreferences("UserInfo", Application.MODE_APPEND);
         SharedPreferences.Editor editor = sp.edit();
@@ -84,6 +95,29 @@ public class UserDataSharedPreferences {
         SharedPreferences sp = context.getSharedPreferences("UserInfo", Application.MODE_APPEND);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear().commit();
+    }
+    public static void setPayMoney(Context context,String money){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Money", Application.MODE_APPEND);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("paymoney",money);
+        editor.commit();
+    }
+
+    public static void setMyNet(Context context,String str,String net){
+        String MyO="0";
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyNet", Application.MODE_APPEND);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("e",MyO);
+        editor.putString("a",MyQ);
+        editor.putString(str,net);
+        editor.commit();
+    }
+
+    public static String getPayMoney(Context context){
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Money", Application.MODE_APPEND);
+        String money = sharedPreferences.getString("paymoney","");
+        return  money;
     }
 
 

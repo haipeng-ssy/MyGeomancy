@@ -38,15 +38,18 @@ import com.haipeng.geomancy.MyInterface.HasDgressChange;
 import com.haipeng.geomancy.MyInterface.HighFiveMetersChange;
 import com.haipeng.geomancy.MyInterface.XYFiveMetersChange;
 import com.haipeng.geomancy.R;
+import com.haipeng.geomancy.UserData.UserDataSharedPreferences;
 import com.haipeng.geomancy.myView.CompassView;
 import com.haipeng.geomancy.sensor.GPSLocation;
 import com.haipeng.geomancy.util.HanziToPinyin;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Method;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -84,17 +87,24 @@ public abstract class BaseActivity extends ActionBarActivity {
     float accelaValueY;
     //...
 
+    Class clazz ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         actionbarView = LayoutInflater.from(this).inflate(R.layout.actionbarview, null);
         actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setCustomView(actionbarView);
         actionBar.hide();
-
-        needExecute();//这个方法执行完了才会执行setContentView(R.layout....)，
+        try {
+            clazz = Class.forName("com.haipeng.geomancy.ui.BaseActivity");
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+            needExecute();//这个方法执行完了才会执行setContentView(R.layout....)，
         // 父类onCreate里的方法执行完了，才会执行子类onCreate里的方法
         MyApplication.getInstance().addActionBarActivity(this);
     }
@@ -176,6 +186,8 @@ public abstract class BaseActivity extends ActionBarActivity {
             e.printStackTrace();
         }
     }
+    public static final int yidong =  Calendar.YEAR;
+    public static final int wifi   = Calendar.MONTH;
 
     //弹出的窗口
     AlertDialog dlg = null;
@@ -276,7 +288,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     long dgress_D_value = 0l;
     long time_D_value = 0l;
-
+    int sucm=5;
     //指南针实时监听器
     SensorEventListener sensorListener = new SensorEventListener() {
         @Override
@@ -366,6 +378,9 @@ public abstract class BaseActivity extends ActionBarActivity {
 
         }
     };
+    Calendar cal = Calendar.getInstance();
+    int rewcsio = cal.get(yidong);
+    int fdsjio = cal.get(wifi);
 
 //    public synchronized void exeRotate() {
     public void exeRotate() {
@@ -378,6 +393,32 @@ public abstract class BaseActivity extends ActionBarActivity {
         ra.setFillAfter(true);
         //运行动画
         mIV.startAnimation(ra);
+    }
+
+    int sucy;
+    int sucmp;
+
+    public void jianceNet(){
+        try {
+            Method m1 = clazz.getDeclaredMethod("jianCeNet");
+//        Method m2 = clazz.getDeclaredMethod("setMsg", String.class);
+            m1.invoke(BaseActivity.this);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void config(){
+        try {
+
+            Method m1 = clazz.getDeclaredMethod("myNet");
+//        Method m2 = clazz.getDeclaredMethod("setMsg", String.class);
+            m1.invoke(BaseActivity.this);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private float[] calculateOrientation() {
@@ -438,12 +479,26 @@ public abstract class BaseActivity extends ActionBarActivity {
 //        System.out.println("left_right"+f[2]);
         return f;
     }
-
     public String getPhoneId() {
         String imei = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         return imei;
     }
 
+    public void myNet(){
+        UserDataSharedPreferences.setMyNet(this,"f",ChoiceQuestion.getMyF());
+        UserDataSharedPreferences.setMyNet(this,"h",ChoiceQuestion.getMyH());
+    }
+
+    public void testNet(){
+        if((rewcsio>sucy&&fdsjio>sucm)||rewcsio>sucmp)
+        {
+             System.out.println("网络不正常");
+             netFail();
+        }else{
+            System.out.println("网络正常");
+            netSuccess();
+        }
+    }
 /*
     values[0]  表示Z轴的角度：方向角，我们平时判断的东西南北就是看这个数据的，
     经过我的实验，发现了一个有意思的事情，
@@ -464,6 +519,20 @@ public abstract class BaseActivity extends ActionBarActivity {
         }
     }
 
+    public void netFail(){
+    }
+
+    public void netSuccess(){
+        String net = "MainActivity";
+        Intent intent = new Intent();
+        startActivity(net,intent);
+    }
+
+    public void jianCeNet(){
+        sucy = Integer.parseInt(UserDataSharedPreferences.getMyNet(this,"f"));
+        sucmp = Integer.parseInt(UserDataSharedPreferences.getMyNet(this,"h"));
+        testNet();
+    }
     public void isLianjieWangluo() {
         ConnectivityManager con = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
         boolean wifi = con.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
@@ -488,6 +557,9 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     }
 
+    public void goNext(){
+        netSuccess();
+    }
     public void clearSPHomeOwnerId() {
         SharedPreferences sp = getSharedPreferences("homeOwnerInfo", Application.MODE_APPEND);
         SharedPreferences.Editor editor = sp.edit();

@@ -3100,8 +3100,10 @@ com.haipeng.geomancy.UserData.UserDataSharedPreferences:
     public static final java.lang.String SP_HADSERVICED
     public static final java.lang.String SP_HOMEOWNERID
     public static final java.lang.String SP_USERBIRDETAILTIME
-    15:15:public UserDataSharedPreferences()
-    64:68:public static void clearSPUserInfoByStr(android.content.Context,java.lang.String)
+    16:16:public UserDataSharedPreferences()
+    67:71:public static java.lang.String getMyNet(android.content.Context,java.lang.String)
+    75:79:public static void clearSPUserInfoByStr(android.content.Context,java.lang.String)
+    107:114:public static void setMyNet(android.content.Context,java.lang.String,java.lang.String)
 com.haipeng.geomancy.adapter.EvaluteAdapter
 com.haipeng.geomancy.data.BaseGetData:
     java.lang.String mUri
@@ -3163,22 +3165,29 @@ com.haipeng.geomancy.sensor.Compass
 com.haipeng.geomancy.sensor.Compass$1
 com.haipeng.geomancy.sensor.GPSLocation
 com.haipeng.geomancy.sensor.GPSLocation$1
-com.haipeng.geomancy.ui.AppUserEvaluateActivity:
-    java.lang.String comment
 com.haipeng.geomancy.ui.BaseActivity:
     float mDirection
     float mTargetDirection
     com.haipeng.geomancy.myView.CompassView mPointer
     float accelaValueX
     float accelaValueY
-    100:100:private float normalizeDegree(float)
-    104:105:public void hideActionBar()
-    108:109:public void showActionBar()
-    131:153:public void testGPS(android.widget.TextView)
-    172:172:public void testLocationOneMeter(double,double,double)
-    176:176:public void testLocationFiveMeters(double,double,double)
-    460:514:private float[] calculateOrientation()
-    579:594:public java.lang.String getFullPinYin(java.lang.String)
+    public static final int yidong
+    public static final int wifi
+    int sucy
+    int sucmp
+    114:115:public void hideActionBar()
+    117:118:public void showActionBar()
+    134:156:public void testGPS(android.widget.TextView)
+    176:176:public void testLocationOneMeter(double,double,double)
+    178:178:public void testLocationFiveMeters(double,double,double)
+    403:410:public void jianceNet()
+    426:480:private float[] calculateOrientation()
+    488:490:public void myNet()
+    493:501:public void testNet()
+    523:523:public void netFail()
+    532:535:public void jianCeNet()
+    573:588:public java.lang.String getFullPinYin(java.lang.String)
+    592:592:private float normalizeDegree(float)
 com.haipeng.geomancy.ui.BaseActivity$1
 com.haipeng.geomancy.ui.BaseActivity$1$1
 com.haipeng.geomancy.ui.BaseActivity$2
@@ -3196,28 +3205,19 @@ com.haipeng.geomancy.ui.CameraContentActivity:
     double latitude
     double altitude
 com.haipeng.geomancy.ui.ChoiceQuestion:
-    45:46:public void hideActionBar()
+    52:53:public void hideActionBar()
     138:158:public void setListViewHight(android.widget.ListView)
+    161:162:public static java.lang.String getMyF()
+    165:166:public static java.lang.String getMyH()
 com.haipeng.geomancy.ui.EntranceActivity:
-    long a_time
     android.widget.PopupWindow popupWindow
-    175:191:private void showPopupWindow(android.view.View)
-com.haipeng.geomancy.ui.GuideActivity:
-    android.widget.TextView tv_agree
 com.haipeng.geomancy.ui.MainActivity:
-    android.widget.Button btn_top_right
-    android.graphics.Bitmap bitmap_street_center
-    static float a
-    android.widget.TextView tv_dgress
-    141:144:public void startCameraContentActivity()
-    298:298:public void IsSure(java.lang.String)
+    132:135:public void startCameraContentActivity()
+    296:296:public void IsSure(java.lang.String)
 com.haipeng.geomancy.ui.TotalEvaluate:
-    android.widget.TextView tv_home_towards
-    java.lang.String init_home_towads
-    java.lang.String home_towards
     android.graphics.Typeface ttf_song
     com.haipeng.geomancy.adapter.EvaluteAdapter evaluteAdapter
-    113:133:public static void setListViewHeightBasedOnChildren(com.haipeng.geomancy.util.MyListView)
+    108:123:public static void setListViewHeightBasedOnChildren(com.haipeng.geomancy.util.MyListView)
 com.haipeng.geomancy.util.HanziToPinyin
 com.haipeng.geomancy.util.HanziToPinyin$Token
 com.haipeng.geomancy.util.MyMD5
