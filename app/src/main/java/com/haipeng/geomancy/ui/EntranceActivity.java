@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -47,6 +48,7 @@ public class EntranceActivity extends BaseActivity implements View.OnClickListen
     CompassView mCompassView;
     PopupWindow popupWindow;
     ScrollView mSV;
+    ImageView iv_layl_url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,8 @@ public class EntranceActivity extends BaseActivity implements View.OnClickListen
         mSV = (ScrollView) findViewById(R.id.activity_entrance_sv);
         btn_bottom_center = (Button) findViewById(R.id.entrance_activity_btn_bottom_center);
         mCompassView = (CompassView) findViewById(R.id.entrance_activity_comparessView);
+
+        iv_layl_url = (ImageView) findViewById(R.id.entrance_layl_url);
     }
 
     public void queryNet(){
@@ -127,6 +131,7 @@ public class EntranceActivity extends BaseActivity implements View.OnClickListen
             }
         }, HttpPostUri.get_pay_money,"");
 
+        iv_layl_url.setOnClickListener(this);
     }
 
     @Override
@@ -141,6 +146,11 @@ public class EntranceActivity extends BaseActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.entrance_activity_btn_bottom_center:
                 goNext();
+                break;
+            case R.id.entrance_layl_url:
+                Uri uri = Uri.parse("http://www.layl.cn");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
                 break;
             default:
                 break;

@@ -68,11 +68,21 @@
                 android:layout_width="50dp"
                 android:layout_height="100dp"
                 android:background="@drawable/layl_logo"/>
-            <ImageView
+            <RelativeLayout
                 android:layout_width="250dp"
                 android:layout_height="100dp"
                 android:background="@drawable/layl_adv"
-                />
+                >
+                <ImageView
+                    android:id="@+id/entrance_layl_url"
+                    android:layout_centerVertical="true"
+                    android:layout_width="160dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/textlayl"
+                    android:background="@null"/>
+             </RelativeLayout>
             </LinearLayout>
         <Button
             android:id="@+id/entrance_activity_btn_bottom_center"
